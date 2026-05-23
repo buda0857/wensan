@@ -141,6 +141,9 @@
                     <button id="tab-dcard" onclick="switchReportTab('dcard')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200">
                         <i class="fas fa-comments mr-2"></i>Dcard 輿情分析
                     </button>
+                    <button id="tab-infranodus" onclick="switchReportTab('infranodus')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200">
+                        <i class="fas fa-project-diagram mr-2"></i>語意網絡圖譜 (InfraNodus)
+                    </button>
                 </div>
 
                 <!-- 子頁面：PTT 分析 -->
@@ -372,6 +375,108 @@
                     </div>
 
                 </div><!-- end report-tab-dcard -->
+
+                <!-- 子頁面：語意網絡分析 (InfraNodus) -->
+                <div id="report-tab-infranodus" class="hidden">
+                    <div class="mb-12 border-b border-slate-200 pb-8">
+                        <div class="inline-block bg-purple-600 text-white px-4 py-1 rounded-lg text-sm font-bold mb-4">專案報告 04</div>
+                        <h2 class="text-3xl font-bold text-slate-800">Dcard 語意網絡話題圖譜 (InfraNodus 方案B)</h2>
+                        <p class="text-slate-500 mt-2">研究主題：Dcard 閒聊板熱門討論的語意關聯性與核心話題群集 (Topic Clustering)</p>
+                    </div>
+
+                    <!-- 總結卡片 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">分析語意節點 (Nodes)</p>
+                            <h4 class="text-3xl font-black text-purple-600">20 <span class="text-sm text-slate-300">個</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">語意關聯邊 (Edges)</p>
+                            <h4 class="text-3xl font-black text-emerald-600">31 <span class="text-sm text-slate-300">條</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">核心話題群 (Clusters)</p>
+                            <h4 class="text-3xl font-black text-blue-600">4 <span class="text-sm text-slate-300">組</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">語意網絡密度</p>
+                            <h4 class="text-3xl font-black text-pink-600">0.16</h4>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-10">
+                        <!-- 圖表: 互動式 2D Canvas 物理力導向圖 -->
+                        <div class="lg:col-span-2 bg-slate-950 p-8 rounded-[2.5rem] border border-slate-900 shadow-xl flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold text-white flex items-center">
+                                    <i class="fas fa-project-diagram text-purple-500 mr-3"></i>互動式話題語意網絡圖
+                                </h3>
+                                <div class="flex gap-2">
+                                    <button onclick="resetPhysicsLayout()" class="px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition active:scale-95">
+                                        <i class="fas fa-sync mr-1"></i>重置佈局
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Canvas Container with border and styling -->
+                            <div class="relative w-full aspect-[4/3] sm:h-[450px] bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 shadow-inner">
+                                <canvas id="networkCanvas" class="w-full h-full cursor-pointer"></canvas>
+                                <!-- Interactive Help overlay -->
+                                <div class="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/5 text-[11px] text-slate-400 flex justify-between items-center pointer-events-none">
+                                    <span>💡 <strong>操作指南：</strong>滑鼠懸停顯示節點資訊，點擊並拖曳可自由排版。</span>
+                                    <span class="text-purple-400 font-semibold">物理引擎運作中</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 側邊話題群與節點點擊面板 -->
+                        <div class="space-y-8 flex flex-col justify-between">
+                            <!-- 話題分群過濾器 -->
+                            <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                                <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center">
+                                    <i class="fas fa-filter text-blue-500 mr-3"></i>話題群組分類 (Topic Clusters)
+                                </h3>
+                                <div class="space-y-3">
+                                    <button onclick="filterNetworkCluster(0)" id="cluster-btn-0" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 text-purple-800 font-bold transition text-left text-sm">
+                                        <span class="flex items-center"><span class="w-3.5 h-3.5 rounded-full bg-purple-500 mr-2.5 shadow"></span>群組 1: Dcard 影音娛樂</span>
+                                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">5 節點</span>
+                                    </button>
+                                    <button onclick="filterNetworkCluster(1)" id="cluster-btn-1" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-800 font-bold transition text-left text-sm">
+                                        <span class="flex items-center"><span class="w-3.5 h-3.5 rounded-full bg-emerald-500 mr-2.5 shadow"></span>群組 2: 社會時事與生活</span>
+                                        <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">6 節點</span>
+                                    </button>
+                                    <button onclick="filterNetworkCluster(2)" id="cluster-btn-2" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-pink-500/20 bg-pink-500/5 hover:bg-pink-500/10 text-pink-800 font-bold transition text-left text-sm">
+                                        <span class="flex items-center"><span class="w-3.5 h-3.5 rounded-full bg-pink-500 mr-2.5 shadow"></span>群組 3: 情感與人際關係</span>
+                                        <span class="text-xs bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full">5 節點</span>
+                                    </button>
+                                    <button onclick="filterNetworkCluster(3)" id="cluster-btn-3" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 text-amber-800 font-bold transition text-left text-sm">
+                                        <span class="flex items-center"><span class="w-3.5 h-3.5 rounded-full bg-amber-500 mr-2.5 shadow"></span>群組 4: 金融理財與房市</span>
+                                        <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">4 節點</span>
+                                    </button>
+                                    <button onclick="filterNetworkCluster('All')" id="cluster-btn-All" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-400 bg-slate-100 text-slate-800 font-bold transition text-left text-sm">
+                                        <span class="flex items-center"><span class="w-3.5 h-3.5 rounded-full bg-slate-400 mr-2.5 shadow"></span>顯示全部網絡結構</span>
+                                        <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">全部 20 點</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 節點詳情動態顯示 -->
+                            <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex-grow">
+                                <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center">
+                                    <i class="fas fa-info-circle text-purple-600 mr-3"></i>語意節點資訊 (Node Info)
+                                </h3>
+                                <div id="node-info-card" class="p-5 rounded-2xl bg-slate-50 border border-slate-100 transition-all duration-300">
+                                    <h4 id="node-info-title" class="text-2xl font-black text-slate-800 mb-2">未選取節點</h4>
+                                    <div class="flex gap-2 mb-4" id="node-info-badges">
+                                        <span class="text-xs bg-slate-200 text-slate-600 px-3 py-1 rounded-full font-bold">點擊節點查看細節</span>
+                                    </div>
+                                    <p id="node-info-desc" class="text-slate-600 text-sm leading-relaxed">
+                                        請在左側的語意網絡中點選任何一個詞彙泡泡。InfraNodus 會為您動態解析該詞彙的語意重要程度，及其在 Dcard 討論脈絡中的關鍵影響。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end report-tab-infranodus -->
 
             </section>
         </div>
@@ -617,31 +722,39 @@
             const pttContent = document.getElementById('report-tab-ptt');
             const ga4Content = document.getElementById('report-tab-ga4');
             const dcardContent = document.getElementById('report-tab-dcard');
+            const infranodusContent = document.getElementById('report-tab-infranodus');
             
             const pttBtn = document.getElementById('tab-ptt');
             const ga4Btn = document.getElementById('tab-ga4');
             const dcardBtn = document.getElementById('tab-dcard');
+            const infranodusBtn = document.getElementById('tab-infranodus');
 
             // Hide all
-            pttContent.classList.add('hidden');
-            ga4Content.classList.add('hidden');
-            dcardContent.classList.add('hidden');
+            if (pttContent) pttContent.classList.add('hidden');
+            if (ga4Content) ga4Content.classList.add('hidden');
+            if (dcardContent) dcardContent.classList.add('hidden');
+            if (infranodusContent) infranodusContent.classList.add('hidden');
             
             // Set inactive button styles
-            pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
-            ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
-            dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            if (pttBtn) pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            if (ga4Btn) ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            if (dcardBtn) dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            if (infranodusBtn) infranodusBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
 
             if (tab === 'ptt') {
-                pttContent.classList.remove('hidden');
-                pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-emerald-600 text-white shadow';
+                if (pttContent) pttContent.classList.remove('hidden');
+                if (pttBtn) pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-emerald-600 text-white shadow';
             } else if (tab === 'ga4') {
-                ga4Content.classList.remove('hidden');
-                ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-blue-600 text-white shadow';
+                if (ga4Content) ga4Content.classList.remove('hidden');
+                if (ga4Btn) ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-blue-600 text-white shadow';
             } else if (tab === 'dcard') {
-                dcardContent.classList.remove('hidden');
-                dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-purple-600 text-white shadow';
+                if (dcardContent) dcardContent.classList.remove('hidden');
+                if (dcardBtn) dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-purple-600 text-white shadow';
                 initDcardDataView();
+            } else if (tab === 'infranodus') {
+                if (infranodusContent) infranodusContent.classList.remove('hidden');
+                if (infranodusBtn) infranodusBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-purple-600 text-white shadow';
+                initInfraNodusView();
             }
         }
 
@@ -1315,6 +1428,417 @@
         }
 
         // 移除舊的覆寫邏輯，因為已經整合進新的 showPage 中
+
+        // ================= InfraNodus 語意網絡 (方案B) =================
+        const infraNodusData = {
+            nodes: [
+                // Cluster 0: Dcard 影音娛樂 (紫色)
+                { id: "Dcard Video", label: "Dcard Video", size: 28, cluster: 0, info: "Dcard 官方 YouTube 頻道的討論，是閒聊板極具人氣的焦點話題。" },
+                { id: "主持人", label: "主持人", size: 22, cluster: 0, info: "提及各影片主持人的表現、人氣特色、街訪異動等討論。" },
+                { id: "企劃", label: "企劃", size: 18, cluster: 0, info: "針對頻道影片題材、街訪或企劃創意的評價與回饋。" },
+                { id: "YouTube", label: "YouTube", size: 16, cluster: 0, info: "提及影音平台上的觀看習慣、訂閱與流量表現相關內容。" },
+                { id: "成員", label: "成員", size: 16, cluster: 0, info: "指 Dcard 影音團隊的各個出鏡成員或幕後人員話題。" },
+                
+                // Cluster 1: 社會時事與生活 (綠色)
+                { id: "台灣", label: "台灣", size: 26, cluster: 1, info: "泛指各種與台灣在地文化、社會習慣、政策相關的話題。" },
+                { id: "政治", label: "政治", size: 20, cluster: 1, info: "社會大眾在閒聊板上對於時事、政策改革與政治輿情的抒發。" },
+                { id: "時事", label: "時事", size: 20, cluster: 1, info: "新聞事件或大眾日常關注的熱門社會議題。" },
+                { id: "超商", label: "超商", size: 16, cluster: 1, info: "與台灣超商便利生活、新品推出、店員互動相關的閒談。" },
+                { id: "機車", label: "機車", size: 15, cluster: 1, info: "台灣機車族群的路權、通勤心得及生活相關討論。" },
+                { id: "官方", label: "官方", size: 18, cluster: 1, info: "提及各品牌、政府或 Dcard 官方發布的聲明或政策。" },
+
+                // Cluster 2: 情感與人際關係 (粉紅色)
+                { id: "情感", label: "情感", size: 24, cluster: 2, info: "包括戀愛、分手、暗戀等男女情感的生活點滴與諮詢。" },
+                { id: "朋友", label: "朋友", size: 20, cluster: 2, info: "社交生活、友情經營、同儕相處與孤單話題。" },
+                { id: "認真", label: "認真", size: 16, cluster: 2, info: "網友在抒發深入心境或認真詢問人生指引時的常用詞彙。" },
+                { id: "小孩", label: "小孩", size: 15, cluster: 2, info: "涉及家庭教育、生育選擇、下一代教育的熱門討論。" },
+                { id: "生活", label: "生活", size: 18, cluster: 2, info: "日常瑣事、租屋生活、上班族辛酸等綜合性話題。" },
+
+                // Cluster 3: 金融理財與房市 (橘黃色)
+                { id: "房貸", label: "房貸", size: 22, cluster: 3, info: "年輕人在置產、背負房貸壓力、房價走勢等理財痛點的討論。" },
+                { id: "理財", label: "理財", size: 18, cluster: 3, info: "儲蓄、投資、股票、ETF 等青年理財規畫經驗分享。" },
+                { id: "預算", label: "預算", size: 16, cluster: 3, info: "日常開銷限制、買房買車預算或結婚花費的限制話題。" },
+                { id: "文化", label: "文化", size: 15, cluster: 3, info: "探討不同世代或階層在金錢與生活文化上的觀念差異。" }
+            ],
+            edges: [
+                { source: "Dcard Video", target: "主持人" },
+                { source: "Dcard Video", target: "企劃" },
+                { source: "Dcard Video", target: "YouTube" },
+                { source: "Dcard Video", target: "成員" },
+                { source: "主持人", target: "成員" },
+                { source: "企劃", target: "成員" },
+                { source: "Dcard Video", target: "台灣" },
+                { source: "Dcard Video", target: "官方" },
+                { source: "台灣", target: "時事" },
+                { source: "台灣", target: "政治" },
+                { source: "台灣", target: "機車" },
+                { source: "台灣", target: "超商" },
+                { source: "時事", target: "政治" },
+                { source: "時事", target: "官方" },
+                { source: "政治", target: "官方" },
+                { source: "台灣", target: "房貸" },
+                { source: "官方", target: "房貸" },
+                { source: "情感", target: "朋友" },
+                { source: "情感", target: "認真" },
+                { source: "情感", target: "生活" },
+                { source: "朋友", target: "生活" },
+                { source: "認真", target: "生活" },
+                { source: "小孩", target: "生活" },
+                { source: "小孩", target: "情感" },
+                { source: "生活", target: "台灣" },
+                { source: "生活", target: "超商" },
+                { source: "房貸", target: "理財" },
+                { source: "房貸", target: "預算" },
+                { source: "理財", target: "預算" },
+                { source: "理財", target: "文化" },
+                { source: "房貸", target: "文化" }
+            ]
+        };
+
+        let nodes = [];
+        let edges = [];
+        let selectedNode = null;
+        let draggedNode = null;
+        let activeCluster = 'All';
+        let animationId = null;
+
+        const clusterColors = [
+            '#a855f7', // Purple
+            '#10b981', // Emerald
+            '#ec4899', // Pink
+            '#f59e0b'  // Amber
+        ];
+
+        function initInfraNodusView() {
+            // Setup canvas
+            const canvas = document.getElementById('networkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            // Adjust canvas resolution for high DPI screens
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Deep copy nodes and setup initial coordinates at center with slight randomness
+            nodes = infraNodusData.nodes.map(n => ({
+                ...n,
+                x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+                y: canvas.height / 2 + (Math.random() - 0.5) * 200,
+                vx: 0,
+                vy: 0,
+                radius: n.size * 0.8
+            }));
+
+            // Map edges to actual node references
+            edges = infraNodusData.edges.map(e => ({
+                sourceNode: nodes.find(n => n.id === e.source),
+                targetNode: nodes.find(n => n.id === e.target)
+            })).filter(e => e.sourceNode && e.targetNode);
+
+            // Interaction Event Listeners
+            canvas.onmousedown = (e) => {
+                const mouseX = e.offsetX;
+                const mouseY = e.offsetY;
+                
+                // Find clicked node
+                let clicked = null;
+                for (let n of nodes) {
+                    // Check if node is visible under current cluster filter
+                    if (activeCluster !== 'All' && n.cluster !== activeCluster) continue;
+                    
+                    const dist = Math.hypot(n.x - mouseX, n.y - mouseY);
+                    if (dist < n.radius) {
+                        clicked = n;
+                        break;
+                    }
+                }
+                
+                if (clicked) {
+                    selectedNode = clicked;
+                    draggedNode = clicked;
+                    updateNodeInfoCard(clicked);
+                } else {
+                    selectedNode = null;
+                }
+            };
+
+            canvas.onmousemove = (e) => {
+                if (draggedNode) {
+                    draggedNode.x = e.offsetX;
+                    draggedNode.y = e.offsetY;
+                    draggedNode.vx = 0;
+                    draggedNode.vy = 0;
+                }
+                
+                // Update cursor
+                let hoverNode = null;
+                for (let n of nodes) {
+                    if (activeCluster !== 'All' && n.cluster !== activeCluster) continue;
+                    if (Math.hypot(n.x - e.offsetX, n.y - e.offsetY) < n.radius) {
+                        hoverNode = n;
+                        break;
+                    }
+                }
+                canvas.style.cursor = hoverNode ? 'pointer' : 'default';
+            };
+
+            canvas.onmouseup = () => {
+                draggedNode = null;
+            };
+
+            canvas.onmouseleave = () => {
+                draggedNode = null;
+            };
+
+            // Select "Dcard Video" as default initial info
+            const defaultNode = nodes.find(n => n.id === "Dcard Video");
+            if (defaultNode) {
+                selectedNode = defaultNode;
+                updateNodeInfoCard(defaultNode);
+            }
+
+            // Start simulation loop
+            if (animationId) cancelAnimationFrame(animationId);
+            simulate();
+        }
+
+        function filterNetworkCluster(clusterId) {
+            activeCluster = clusterId;
+            
+            // Update filter buttons styling
+            ['0', '1', '2', '3', 'All'].forEach(id => {
+                const btn = document.getElementById(`cluster-btn-${id}`);
+                if (!btn) return;
+                
+                if (id === clusterId.toString()) {
+                    if (id === 'All') {
+                        btn.className = "w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-400 bg-slate-100 text-slate-800 font-bold transition text-left text-sm shadow-sm";
+                    } else {
+                        const color = id === '0' ? 'purple' : id === '1' ? 'emerald' : id === '2' ? 'pink' : 'amber';
+                        btn.className = `w-full flex items-center justify-between p-3.5 rounded-2xl border border-${color}-500 bg-${color}-500/20 text-${color}-900 font-bold transition text-left text-sm shadow-sm`;
+                    }
+                } else {
+                    if (id === 'All') {
+                        btn.className = "w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold transition text-left text-sm";
+                    } else {
+                        const color = id === '0' ? 'purple' : id === '1' ? 'emerald' : id === '2' ? 'pink' : 'amber';
+                        btn.className = `w-full flex items-center justify-between p-3.5 rounded-2xl border border-${color}-500/10 bg-${color}-500/5 hover:bg-${color}-500/10 text-${color}-800 font-bold transition text-left text-sm`;
+                    }
+                }
+            });
+
+            // Update details card for a node in the selected cluster
+            if (clusterId !== 'All') {
+                const nodeInCluster = nodes.find(n => n.cluster === clusterId);
+                if (nodeInCluster) {
+                    selectedNode = nodeInCluster;
+                    updateNodeInfoCard(nodeInCluster);
+                }
+            }
+        }
+
+        function resetPhysicsLayout() {
+            const canvas = document.getElementById('networkCanvas');
+            if (!canvas) return;
+            
+            nodes.forEach(n => {
+                n.x = canvas.width / 2 + (Math.random() - 0.5) * 200;
+                n.y = canvas.height / 2 + (Math.random() - 0.5) * 200;
+                n.vx = 0;
+                n.vy = 0;
+            });
+        }
+
+        function updateNodeInfoCard(node) {
+            const title = document.getElementById('node-info-title');
+            const desc = document.getElementById('node-info-desc');
+            const badges = document.getElementById('node-info-badges');
+            
+            if (!title || !desc || !badges) return;
+
+            title.innerText = node.label;
+            desc.innerText = node.info;
+
+            const clusterNames = ["Dcard 影音娛樂", "社會時事與生活", "情感與人際關係", "金融理財與房市"];
+            const colors = [
+                "bg-purple-100 text-purple-700 border-purple-200",
+                "bg-emerald-100 text-emerald-700 border-emerald-200",
+                "bg-pink-100 text-pink-700 border-pink-200",
+                "bg-amber-100 text-amber-700 border-amber-200"
+            ];
+
+            badges.innerHTML = `
+                <span class="text-xs px-3 py-1 rounded-full font-bold border ${colors[node.cluster]}">${clusterNames[node.cluster]}</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold border border-slate-200">權重: ${node.size}</span>
+            `;
+        }
+
+        function simulate() {
+            const canvas = document.getElementById('networkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            // Force Directed Graph Physics variables
+            const repulsionConstant = 600; // Repulsive force
+            const springConstant = 0.04;    // Attractive force (spring stiffness)
+            const springLength = 110;       // Rest length of spring
+            const damping = 0.85;           // Friction/damping coefficient
+            const centerGravity = 0.015;    // Force pulling nodes to center
+
+            // 1. Repulsion Force between all nodes
+            for (let i = 0; i < nodes.length; i++) {
+                const nodeA = nodes[i];
+                if (activeCluster !== 'All' && nodeA.cluster !== activeCluster) continue;
+
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const nodeB = nodes[j];
+                    if (activeCluster !== 'All' && nodeB.cluster !== activeCluster) continue;
+
+                    const dx = nodeB.x - nodeA.x;
+                    const dy = nodeB.y - nodeA.y;
+                    const dist = Math.hypot(dx, dy) || 1;
+
+                    // Repulsion formula
+                    const force = repulsionConstant / (dist * dist);
+                    const fx = (dx / dist) * force;
+                    const fy = (dy / dist) * force;
+
+                    if (nodeA !== draggedNode) {
+                        nodeA.vx -= fx;
+                        nodeA.vy -= fy;
+                    }
+                    if (nodeB !== draggedNode) {
+                        nodeB.vx += fx;
+                        nodeB.vy += fy;
+                    }
+                }
+            }
+
+            // 2. Spring Attraction Force for connected nodes
+            edges.forEach(e => {
+                const nodeA = e.sourceNode;
+                const nodeB = e.targetNode;
+
+                // Skip force calculation if one of the nodes is filtered out
+                if (activeCluster !== 'All' && (nodeA.cluster !== activeCluster || nodeB.cluster !== activeCluster)) return;
+
+                const dx = nodeB.x - nodeA.x;
+                const dy = nodeB.y - nodeA.y;
+                const dist = Math.hypot(dx, dy) || 1;
+
+                const displacement = dist - springLength;
+                const force = springConstant * displacement;
+                const fx = (dx / dist) * force;
+                const fy = (dy / dist) * force;
+
+                if (nodeA !== draggedNode) {
+                    nodeA.vx += fx;
+                    nodeA.vy += fy;
+                }
+                if (nodeB !== draggedNode) {
+                    nodeB.vx -= fx;
+                    nodeB.vy -= fy;
+                }
+            });
+
+            // 3. Gravity pulling to canvas center & Apply motion limits
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            nodes.forEach(n => {
+                if (activeCluster !== 'All' && n.cluster !== activeCluster) return;
+                if (n === draggedNode) return;
+
+                // Center gravity
+                n.vx += (centerX - n.x) * centerGravity;
+                n.vy += (centerY - n.y) * centerGravity;
+
+                // Apply velocity and damping
+                n.x += n.vx;
+                n.y += n.vy;
+                n.vx *= damping;
+                n.vy *= damping;
+
+                // Bounds collision
+                n.x = Math.max(n.radius + 10, Math.min(canvas.width - n.radius - 10, n.x));
+                n.y = Math.max(n.radius + 10, Math.min(canvas.height - n.radius - 10, n.y));
+            });
+
+            // 4. DRAW GRAPH ON CANVAS
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid background
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+            ctx.lineWidth = 1;
+            const gridSize = 40;
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+
+            // Draw Edges (Attraction Links)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+            ctx.lineWidth = 1.5;
+            edges.forEach(e => {
+                const nodeA = e.sourceNode;
+                const nodeB = e.targetNode;
+
+                if (activeCluster !== 'All' && (nodeA.cluster !== activeCluster || nodeB.cluster !== activeCluster)) return;
+
+                ctx.beginPath();
+                ctx.moveTo(nodeA.x, nodeA.y);
+                ctx.lineTo(nodeB.x, nodeB.y);
+                ctx.stroke();
+            });
+
+            // Draw Nodes (Vibrant Bubble Circles)
+            nodes.forEach(n => {
+                if (activeCluster !== 'All' && n.cluster !== activeCluster) return;
+
+                const color = clusterColors[n.cluster];
+                const isActive = (n === selectedNode);
+
+                // Outer glow if node is selected
+                if (isActive) {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.radius + 6, 0, Math.PI * 2);
+                    ctx.fillStyle = color + '22';
+                    ctx.fill();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                // Inner circle
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                ctx.fillStyle = color + 'dd';
+                ctx.fill();
+                
+                // Add soft glassmorphic gradient overlay inside bubble
+                const gradient = ctx.createRadialGradient(n.x - n.radius/3, n.y - n.radius/3, 2, n.x, n.y, n.radius);
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0.2)');
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Draw Text Label
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${n.radius * 0.45 + 5}px "Noto Sans TC", sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 4;
+                ctx.fillText(n.label, n.x, n.y);
+                ctx.shadowBlur = 0; // reset
+            });
+
+            // Next frame
+            animationId = requestAnimationFrame(simulate);
+        }
 
         window.onload = () => {
             showPage('home');
