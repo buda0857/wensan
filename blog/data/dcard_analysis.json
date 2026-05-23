@@ -1,0 +1,436 @@
+{
+  "overall": {
+    "total_posts": 55,
+    "total_likes": 3408,
+    "total_comments": 2681,
+    "sentiment_distribution": {
+      "Positive": 21,
+      "Neutral": 22,
+      "Negative": 12
+    }
+  },
+  "top_keywords": [
+    {
+      "text": "可以",
+      "value": 11
+    },
+    {
+      "text": "台灣",
+      "value": 10
+    },
+    {
+      "text": "就是",
+      "value": 10
+    },
+    {
+      "text": "討論",
+      "value": 9
+    },
+    {
+      "text": "有人",
+      "value": 8
+    },
+    {
+      "text": "他們",
+      "value": 8
+    },
+    {
+      "text": "這樣",
+      "value": 7
+    },
+    {
+      "text": "最近",
+      "value": 7
+    },
+    {
+      "text": "政治",
+      "value": 6
+    },
+    {
+      "text": "怎麼",
+      "value": 6
+    },
+    {
+      "text": "時候",
+      "value": 6
+    },
+    {
+      "text": "文化",
+      "value": 5
+    },
+    {
+      "text": "分享",
+      "value": 5
+    },
+    {
+      "text": "直接",
+      "value": 5
+    },
+    {
+      "text": "女人",
+      "value": 5
+    },
+    {
+      "text": "有點",
+      "value": 5
+    },
+    {
+      "text": "這種",
+      "value": 5
+    },
+    {
+      "text": "一下",
+      "value": 5
+    },
+    {
+      "text": "不是",
+      "value": 5
+    },
+    {
+      "text": "一定",
+      "value": 4
+    },
+    {
+      "text": "不好",
+      "value": 4
+    },
+    {
+      "text": "一名",
+      "value": 4
+    },
+    {
+      "text": "原本",
+      "value": 4
+    },
+    {
+      "text": "完全",
+      "value": 4
+    },
+    {
+      "text": "小孩",
+      "value": 4
+    },
+    {
+      "text": "機車",
+      "value": 4
+    },
+    {
+      "text": "問題",
+      "value": 4
+    },
+    {
+      "text": "認真",
+      "value": 4
+    },
+    {
+      "text": "朋友",
+      "value": 4
+    },
+    {
+      "text": "本來",
+      "value": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "喊出✨大學必做的事✨拿 5000 元夢想基金再讓 Dcard Video 陪你圓夢❤️‍🔥 \\#夢想派送計畫",
+      "snippet": "大學是個很奇妙的地方🏫，長到可以修完 128 學分、熬夜 87 次、愛上 2 個人、後悔無數件事💔，卻又短到一轉眼就結束了💫，上大學前許願想完成的事，你都做了嗎？有些事，再不做就真的沒機會了🫵，不論你 1.4K",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 765,
+      "comments": 359,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 2,
+      "title": "\\#集中討論 文化幣邀請碼分享",
+      "snippet": "近日因文化幣發送，我們發現站上有許多人會分享邀請碼以賺取更多文化幣，小天使特地開此討論串，讓大家能夠盡情分享邀請碼！在發送你的邀請碼前，請務必注意下列事項：1\\. 全站僅限於集中討論串或是個人看板中分享",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 380,
+      "comments": 550,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 3,
+      "title": "\\#公告 時事、政治相關議題請至時事板發表",
+      "snippet": "各位卡友們好，我們始終努力維持一個友善的討論環境，並鼓勵大家到各個看板討論符合板旨的議題；由於近期有許多政治類型的討論文章發表在閒聊板中，請各位卡友留意「討論政治人物、政策、政治立場或張貼政治新聞」類",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 309,
+      "comments": 580,
+      "sentiment": "Positive",
+      "sentiment_score": 0.7
+    },
+    {
+      "id": 4,
+      "title": "嘴擎天崗五分鐘一定沒玩過",
+      "snippet": "野砲五分鐘其實不短了，在外面享受的是刺激的爽感，隨時都有可能被發現，誰跟你慢慢做啊🤣，當然是速戰速決，我自己跟另一半也是很常在野外，時間基本都不超過五分鐘，但在床上根本不可能那麼短，野外也不好換姿勢，",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 298,
+      "comments": 100,
+      "sentiment": "Positive",
+      "sentiment_score": 0.7
+    },
+    {
+      "id": 5,
+      "title": "NONO 要入獄了",
+      "snippet": "NONO 因涉性侵猥褻 6 女其中一案成立，依強制性交未遂判 2 年 6 個月，昨天上訴期限正式屆滿，台灣高等檢察署決定不再提上訴，說二審判決沒有違背法令，希望判決早日確定、讓他入監服刑，一二審都維持",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 360,
+      "comments": 91,
+      "sentiment": "Negative",
+      "sentiment_score": 0.2
+    },
+    {
+      "id": 6,
+      "title": "擎天崗野戰情侶到案了",
+      "snippet": "上週擎天崗直播野戰的事，這兩天終於有後續了，兩人在 17 日低調前往警局製作筆錄，也坦承自己就是影片中的男女主角，據說一開始男方說要請假去，後來又沒出現，最後才終於去了，兩人都說不知道現場有攝影機，也",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 289,
+      "comments": 51,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 7,
+      "title": "台男霸凌女同學：吃我的屌",
+      "snippet": "台北市一名國中三年級女學生，長期遭受同班男同學言語霸凌及性騷擾，17日會考中午時，男同學竟在考場開黃腔，甚至嗆「吃我的Ｘ」，女學生憤而揍對方肚子一拳，未料男同學隨即反擊，不僅將她踢倒在地，更出拳毆打臉 \\\\",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 175,
+      "comments": 69,
+      "sentiment": "Negative",
+      "sentiment_score": 0.2
+    },
+    {
+      "id": 8,
+      "title": "不小心看到送肉粽怎麼辦",
+      "snippet": "如題，近期實在太多相關文章了，剛剛無聊滑脆，結果有網友去朝聖 甚至把畫面拍下來，然後我看到了好像，不過只看到喵到道士，我應該做些什麼嗎。。。網路上看到也算嗎，我保持敬畏的心但還是怕怕的不知道怎麼辦..",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 71,
+      "comments": 141,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 9,
+      "title": "2027 年的連假出來了",
+      "snippet": "全年總放假日 121 天！！！，而且有 9 個 3 天以上的連假，春節連休 7 天，今年還沒過一半，已經開始期待明年了，不說了我要先來安排出國（？ Forum",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 87,
+      "comments": 15,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 10,
+      "title": "一回到家，直接砲轟警局",
+      "snippet": "是這樣的，回到家我發現我的東西全部被環保局清運掉，是的，我被檢舉，但我只是把東西堆家門口，因為，租屋處空間很小，實在堆不了太多東西。看到被舉發，我很傻眼，是怎樣？我是把東西放路中間還是擋消防通道？什麼",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 48,
+      "comments": 88,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 11,
+      "title": "北市中山死亡車禍！無照男持影本租車撞死騎士　還是違規大戶積欠40張罰單",
+      "snippet": "北市中山區吉林路與長春路口19日上午8時許發生一起死亡車禍事故。一名黃姓男子駕駛租賃車輛行經該處時，與一名許姓騎士發生擦撞，強大撞擊力道當場造成許姓騎士被撞飛，緊急送醫後仍不幸不治。至於詳細事故原因仍",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 82,
+      "comments": 47,
+      "sentiment": "Negative",
+      "sentiment_score": 0.0
+    },
+    {
+      "id": 12,
+      "title": "台大台男：憑實力把男宿住成女宿",
+      "snippet": "台大男宿的台男有福了",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 61,
+      "comments": 17,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 13,
+      "title": "被鬼壓床原本要去拜拜，後來才發現是我有病",
+      "snippet": "各位…，我前幾天真的以為自己要被帶走😢，現在還餘悸猶存，那天只是加班加比較晚，回家洗好澡就直接躺平，結果半夜突然半夢半醒，感覺醒了 但整個人又完全動不了，還一直聽到有人在叫我，胸口超悶 像被什麼壓住一",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 43,
+      "comments": 11,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 14,
+      "title": "每個月5千還是不想生",
+      "snippet": "補，只有我覺得大家厭童，絕大部分是被狼性職場搞出來的嗎，以前我都覺得有小孩的人，一定是家裡後院有石油的那種人，所以在路上看到親子，總覺得這是某種炫耀行為（？酸葡萄心態（？？但如果可以讓職場對養小孩很友",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 30,
+      "comments": 86,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 15,
+      "title": "大家知道什麼是生物膜嗎？",
+      "snippet": "上禮拜跟同學一起去宜蘭包棟過夜，才發現居然有人不知道生物膜是什麼😳，我以為這是生活常識耶！！，簡單講生物膜就是細菌聚集後形成的一層黏黏滑滑的膜，超常出現在水槽排水口、浴室磁磚縫、蓮蓬頭、洗手台那種長期",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 46,
+      "comments": 22,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 16,
+      "title": "大家最近也開始感受到畢業即失業了嗎…",
+      "snippet": "今年應屆畢業的大家都開始找工作了嗎？這陣子投了好多家職缺，每一次按出送出履歷，心裡都抱著一絲期待，結果換來的只有無止境的已讀不回。 看著那些投遞狀態從未讀變成已讀，然後就再也沒有然後了。那種付出了努力",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 22,
+      "comments": 24,
+      "sentiment": "Negative",
+      "sentiment_score": 0.3
+    },
+    {
+      "id": 17,
+      "title": "台男：醫學系的課是我聽到最多歧視性別跟種族的地方",
+      "snippet": "台男認證的醫學系台男最愛歧視性別跟種族",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 20,
+      "comments": 33,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 18,
+      "title": "家人過世請益",
+      "snippet": "我的父親在前幾天過世了，名下有許多東西（車子、機車、房子、財產）等等。目前尚未辦除戶，財產為母親與我平分繼承，請問有人辦過類似流程嗎？除戶之前可以將郵局及銀行的錢領出嗎？目前應該會先去辦汽機車過戶，爸",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 9,
+      "comments": 13,
+      "sentiment": "Negative",
+      "sentiment_score": 0.4
+    },
+    {
+      "id": 19,
+      "title": "不主動、不拒絕、不負責",
+      "snippet": "女人真的別以為，男人對妳有點主動、有點曖昧，妳就能拿捏他的心態。很多時候，妳以為自己在拉扯他，其實人家心裡根本超清楚。他知道妳在釋放好感，但又故意不讓他真的得到，不就是想看他會不會先付出、先承諾嗎？但",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 20,
+      "comments": 11,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 20,
+      "title": "外國人：感受到台灣人心險惡，但我能忍受",
+      "snippet": "台灣人現在對外國人愈來愈不友善了",
+      "link": "https://www.dcard.tw/f/talk/p/261516000",
+      "likes": 0,
+      "comments": 0,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 21,
+      "title": "外國人：台鐵應該設立茹素專用車廂",
+      "snippet": "台灣實在太落後了，除了女性專屬車廂，應該還要有茹素專屬車廂，台灣不加緊腳步跟上國際，難怪國旅發展失敗，連外國人都看不下去",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 15,
+      "comments": 40,
+      "sentiment": "Negative",
+      "sentiment_score": 0.3
+    },
+    {
+      "id": 22,
+      "title": "現在超商整齊標準都要這麼高嗎",
+      "snippet": "如題，看到threads上有人發了這個，我嘖嘖稱奇，確實看起來很賞心悅目沒錯，但我真的是很好奇店員要排成這樣要花多少時間啊，要不就是他有強迫症或是完美主義心態，要不就是他們店生意不好所以他有大把時間可",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 25,
+      "comments": 4,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 23,
+      "title": "iwin的兒童及少年福利與權益保障法修正草案看起來超級危險",
+      "snippet": "連結內是前版上的討論，大致整理了修改後的問題：一、 擴大權能夠硬性封網，首先，修正後的第六條第十四項，相較於原本沒有的定義，修法後幾乎將整個台灣的網路生態全面納入管轄：第六條第十四項（網際網路業者定義 中原大學[4/22](https://www.dcard.tw/f/talk/p/26134748...",
+      "link": "https://www.dcard.tw/f/talk/p/261347486",
+      "likes": 0,
+      "comments": 0,
+      "sentiment": "Negative",
+      "sentiment_score": 0.4
+    },
+    {
+      "id": 24,
+      "title": "衛福部又想搞鬼了",
+      "snippet": "他們弄了一個這個，其中 第59條寫了，說人話 他可以不跑任何流程直接封網，然後再來 最嚴重的，五十九條第七款所述：「年齡識別之標準、方式、例外、實務準則與技術要求，由通訊傳播主管機關會同數位發展主管機 ❝ Quoted Articles",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 16,
+      "comments": 9,
+      "sentiment": "Neutral",
+      "sentiment_score": 0.5
+    },
+    {
+      "id": 25,
+      "title": "油煙機換新求建議！",
+      "snippet": "舊的抽油煙機因為卡油刷不掉，感覺吸力變得很無感，想換進風口離鍋子近的款式，目前在看櫻花的DR7397，不知道這種近吸式攔截油煙的效果好嗎？另外想問它的靜音除味功能，運轉聲音會不會很大？沒用過近吸式的想",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 15,
+      "comments": 6,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 26,
+      "title": "簡直跟猴子一樣",
+      "snippet": "在蔦屋書店跟星巴克附設的座位吃 「韭菜」煎包， 還有看手機音量開大聲， 真的是跟猴子一樣，有夠扯，猩球崛起裡的都比這隻有文化",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 9,
+      "comments": 7,
+      "sentiment": "Negative",
+      "sentiment_score": 0.4
+    },
+    {
+      "id": 27,
+      "title": "有人會把打手槍後的衛生紙暫時放在電腦機殼嗎",
+      "snippet": "剛打完手槍的衛生紙都會有很明顯的味道，如果馬上丟垃圾桶其他人打開一下很快就聞到了，放在在房間也有味道，後來發現可以放電腦機殼裡而且很通風不會有異味，隔天拿出來就乾了很方便，不知道有沒有人也這樣。",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 11,
+      "comments": 17,
+      "sentiment": "Negative",
+      "sentiment_score": 0.4
+    },
+    {
+      "id": 28,
+      "title": "啊勞越來越多",
+      "snippet": "今天在自習室遇到啊勞 香水味整間都是就算了 手機不關靜音通知狂跳 脫拖鞋盤腿坐 在看他了繼續大聊特聊 好奇在他們國家在圖書館這樣很正常嗎？如果遇到這種又語言不通要怎麼處理？除了抓去當工人跟推輪椅 認真",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 6,
+      "comments": 2,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 29,
+      "title": "如果你的命必須殺人續命你會去做嗎？",
+      "snippet": "看完〈國有器官〉 我跟男友大吵一架…… 我一直以為大部分人都跟我一樣，即使到了窮途末路的時候，也絕對不會為了自己活命而害人，畢竟從小到大都被教要當個好人，但男友卻說，如果被害的人發生在他的親人中他一定",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 7,
+      "comments": 15,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    },
+    {
+      "id": 30,
+      "title": "\\[閒聊\\] 被寶雅店員朋友推坑的瞬暢果凍，認真有效💩",
+      "snippet": "上次跟一個在寶雅上班的朋友吃飯，聊到我最近因為壓力大，肚子脹到快炸開，每次去廁所都會蹲到腳麻，本來真的打算去藥局買那種強效便秘藥了，結果我朋友叫我冷靜，說那種藥不能亂吃，吃久了腸胃會變得很懶惰，她直接",
+      "link": "https://www.dcard.tw/f/talk",
+      "likes": 8,
+      "comments": 5,
+      "sentiment": "Positive",
+      "sentiment_score": 0.6
+    }
+  ]
+}

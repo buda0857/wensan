@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Dcard 閒聊板熱門輿情分析看板 | 極客探索日誌</title>
+    <meta name="description" content="使用自然語言處理（NLP）與中文斷詞技術，深度分析 Dcard 閒聊板最新熱門討論，呈現情緒極性分佈與關鍵詞文字雲。">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Custom Page Sub-Styles for Keyword Badges -->
+    <style>
+        .keyword-badges-card {
+            margin-bottom: 4rem;
+        }
+        .keyword-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        .keyword-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid var(--color-border);
+            transition: var(--transition-smooth);
+            cursor: default;
+        }
+        .keyword-badge small {
+            font-size: 0.75rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-text-secondary);
+        }
+        /* Heat Colors based on Frequency */
+        .keyword-badge.heat-high {
+            background: rgba(0, 245, 160, 0.12);
+            color: var(--accent-emerald);
+            border-color: rgba(0, 245, 160, 0.3);
+            box-shadow: 0 0 10px rgba(0, 245, 160, 0.05);
+        }
+        .keyword-badge.heat-high small {
+            background: rgba(0, 245, 160, 0.2);
+            color: var(--color-text-primary);
+        }
+        .keyword-badge.heat-med {
+            background: rgba(112, 0, 255, 0.15);
+            color: #b785ff;
+            border-color: rgba(112, 0, 255, 0.3);
+        }
+        .keyword-badge.heat-med small {
+            background: rgba(112, 0, 255, 0.25);
+            color: var(--color-text-primary);
+        }
+        .keyword-badge.heat-low {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--color-text-secondary);
+        }
+        .keyword-badge:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- Header Navigation --- -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span style="font-size: 1.7rem;">⚡</span> 極客探索日誌
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" id="nav-home">首頁</a></li>
+                    <li><a href="dcard-analysis.html" class="active" id="nav-analytics">Dcard 數據分析</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- --- Inner Page Hero Banner --- -->
+    <section class="hero" style="padding: 4rem 2rem 2rem 2rem;">
+        <span class="hero-tag">NLP Sentiment Dashboard</span>
+        <h1 style="font-size: 3rem;">Dcard 閒聊板輿情數據分析</h1>
+        <p style="font-size: 1.1rem; max-width: 800px; margin-bottom: 0;">
+            利用 Firecrawl 與結巴（Jieba）中文分詞技術，分析 Dcard 閒聊板最新 55 則熱門貼文。本看板呈現了整體情緒分佈、熱門關鍵詞提取與每則貼文的情感極性分析。
+        </p>
+    </section>
+
+    <!-- --- Dashboard Container --- -->
+    <main class="main-container" style="padding-top: 2rem;">
+        
+        <!-- 1. Real-time statistics counters -->
+        <div class="analytics-dashboard" id="dashboard-counters">
+            <div class="glass-card stat-card" id="card-total-posts">
+                <span class="stat-label">分析樣本貼文數</span>
+                <span class="stat-value" id="stat-total-posts">0</span>
+                <span class="stat-desc">Dcard Talk 熱門看板最新貼文</span>
+            </div>
+            <div class="glass-card stat-card" id="card-total-likes">
+                <span class="stat-label">累計互動反應量 (Likes)</span>
+                <span class="stat-value" id="stat-total-likes">0</span>
+                <span class="stat-desc">包含按讚、哈、怒、哭等心情反應</span>
+            </div>
+            <div class="glass-card stat-card" id="card-total-comments">
+                <span class="stat-label">累計留言討論數</span>
+                <span class="stat-value" id="stat-total-comments">0</span>
+                <span class="stat-desc">文章底下的卡友留言討論次數</span>
+            </div>
+        </div>
+
+        <!-- 2. Charts & WordCloud Section -->
+        <div class="visuals-grid">
+            
+            <!-- Left: Donut Chart -->
+            <div class="glass-card chart-card" id="sentiment-chart-card">
+                <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1.5rem;">
+                    💬 卡友輿情情緒極性分佈
+                </h3>
+                <div class="chart-container" id="sentiment-donut-container">
+                    <!-- Dynamic Donut Chart SVG will be rendered here by app.js -->
+                    <div style="color: var(--color-text-muted);">正在加載圖表模組...</div>
+                </div>
+                <ul class="legend-list">
+                    <li class="legend-item"><span class="legend-color" style="background: var(--color-positive);"></span> 正向情緒 (Positive)</li>
+                    <li class="legend-item"><span class="legend-color" style="background: var(--color-neutral);"></span> 中立情緒 (Neutral)</li>
+                    <li class="legend-item"><span class="legend-color" style="background: var(--color-negative);"></span> 負向情緒 (Negative)</li>
+                </ul>
+            </div>
+
+            <!-- Right: WordCloud Image -->
+            <div class="glass-card wordcloud-card" id="wordcloud-container-card">
+                <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1.5rem;">
+                    ☁️ 輿論核心熱門關鍵詞雲
+                </h3>
+                <div style="margin-bottom: 1rem;">
+                    <img src="assets/dcard-wordcloud.png" alt="Dcard 閒聊板熱詞文字雲" id="wordcloud-img">
+                </div>
+                <p style="color: var(--color-text-secondary); font-size: 0.85rem;">
+                    基於繁體中文「結巴分詞」演算法，提取出最具代表性的高頻詞彙。字體越大代表在卡友討論中被提及的頻率越高。
+                </p>
+            </div>
+
+        </div>
+
+        <!-- 3. Segmented Keyword Badges Grid -->
+        <div class="glass-card keyword-badges-card" id="keyword-badges-card-block">
+            <h3 style="font-family: var(--font-heading); font-size: 1.3rem;">
+                🔥 熱門詞彙提及頻次排行 TOP 30
+            </h3>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">
+                綠色代表極高頻提及詞（High Heat），紫色為高頻提及詞（Medium Heat），灰色為一般高頻詞。
+            </p>
+            <div class="keyword-container" id="keyword-badges-list">
+                <!-- Badges will be dynamically populated here by app.js -->
+            </div>
+        </div>
+
+        <!-- 4. Interactive Analyzed Posts Grid List -->
+        <section class="posts-list-section">
+            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                📋 貼文數據極性分析明細
+            </h3>
+            
+            <!-- Filters & Search Controls -->
+            <div class="filter-bar">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="search-input" placeholder="輸入關鍵字以搜尋貼文標題或摘要內容...">
+                </div>
+                <div class="filter-tags">
+                    <button class="filter-tag active" data-filter="All" id="filter-tag-all">全部</button>
+                    <button class="filter-tag" data-filter="Positive" id="filter-tag-pos">正向情緒</button>
+                    <button class="filter-tag" data-filter="Neutral" id="filter-tag-neu">中立情緒</button>
+                    <button class="filter-tag" data-filter="Negative" id="filter-tag-neg">負向情緒</button>
+                </div>
+            </div>
+            
+            <!-- Posts Grid -->
+            <div class="posts-grid" id="dcard-posts-grid">
+                <!-- Cards will be dynamically rendered here by app.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- --- Footer --- -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <p>© 2026 極客探索日誌. Powered by Firecrawl & Vanilla Stack.</p>
+            <p>
+                <a href="index.html">首頁</a> · 
+                <a href="dcard-analysis.html">Dcard 數據看板</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>極客探索日誌 | 技術與數據洞察部落格</title>
+    <meta name="description" content="分享最新的軟體開發技術、AI 代理系統、Web 數據爬取以及自然語言處理（NLP）輿情分析的個人部落格。">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- --- Header Navigation --- -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span style="font-size: 1.7rem;">⚡</span> 極客探索日誌
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active" id="nav-home">首頁</a></li>
+                    <li><a href="dcard-analysis.html" id="nav-analytics">Dcard 數據分析</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- --- Hero Section --- -->
+    <section class="hero" id="hero-banner">
+        <span class="hero-tag">Tech & Data Analysis</span>
+        <h1>探求數據背後的<span>核心真實</span></h1>
+        <p>在這裡，我們用爬蟲探查網路生態，用自然語言處理（NLP）解密輿論焦點，並分享軟體開發與 AI 系統集成的技術心得。</p>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="dcard-analysis.html" class="btn btn-primary" id="hero-cta-primary">
+                📊 瀏覽最新 Dcard 分析看板
+            </a>
+            <a href="#recent-posts-list" class="btn btn-secondary" id="hero-cta-secondary">
+                📖 閱讀技術文章
+            </a>
+        </div>
+    </section>
+
+    <!-- --- Main Content Grid --- -->
+    <main class="main-container">
+        <div class="home-layout">
+            
+            <!-- Left Column: Blog Posts -->
+            <section class="posts-section">
+                <h2 class="section-title" id="sec-title-posts">最新技術與分析文章</h2>
+                
+                <div class="post-list" id="recent-posts-list">
+                    <!-- The Dcard Post will be dynamically prepended here by app.js -->
+                    
+                    <article class="post-card glass-card" id="blog-post-books">
+                        <div class="post-meta">
+                            <span class="tag">爬蟲技術</span>
+                            <span>2026 年 5 月 23 日</span>
+                            <span>📈 50 檔圖書</span>
+                        </div>
+                        <h3><a href="javascript:void(0)">博客來中文書當日即時熱銷榜 TOP 50 數據採集與發現</a></h3>
+                        <p>探討如何使用 Firecrawl 的高性能 Scrape API 從博客來網路書店即時榜抓取當前最熱銷的 50 檔書籍。在本期分析中，我們發現作家楊双子因奪下國際布克獎，其作品在排行榜前 6 名中霸佔 5 席，展現了強大的文學社群效應...</p>
+                        <div>
+                            <a href="javascript:void(0)" class="read-more">閱讀全文 →</a>
+                        </div>
+                    </article>
+
+                    <article class="post-card glass-card" id="blog-post-mcp">
+                        <div class="post-meta">
+                            <span class="tag">AI 代理系統</span>
+                            <span>2026 年 5 月 21 日</span>
+                            <span>⚙️ Model Context Protocol</span>
+                        </div>
+                        <h3><a href="javascript:void(0)">淺談 Model Context Protocol（MCP）如何重塑 AI 編碼的未來</a></h3>
+                        <p>Model Context Protocol 是由 Anthropic 開源的通用連接標準。本文詳細探討 MCP 如何作為「AI Agent 的 USB-C 接口」，讓 AI 編碼助手可以直接連接本地資料庫、文字分析引擎及遠端網頁爬取工具，大幅拓展 Agent 實行複雜任務的能力...</p>
+                        <div>
+                            <a href="javascript:void(0)" class="read-more">閱讀全文 →</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Right Column: Sidebar -->
+            <aside class="sidebar">
+                
+                <!-- Dcard Analytics Preview Card -->
+                <div class="glass-card" style="position: sticky; top: 120px;" id="sidebar-preview-card">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        📊 Dcard 輿論即時看板
+                    </h3>
+                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                        最新數據抓取完成！針對閒聊板最新 55 則熱門討論進行 NLP 情感標註。
+                    </p>
+                    
+                    <div class="preview-chart-box">
+                        <svg width="100" height="100" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="12" />
+                            <circle cx="60" cy="60" r="50" fill="transparent" stroke="var(--color-positive)" stroke-width="12" stroke-dasharray="120 314" stroke-dashoffset="0" />
+                            <circle cx="60" cy="60" r="50" fill="transparent" stroke="var(--color-neutral)" stroke-width="12" stroke-dasharray="125 314" stroke-dashoffset="-120" />
+                            <circle cx="60" cy="60" r="50" fill="transparent" stroke="var(--color-negative)" stroke-width="12" stroke-dasharray="69 314" stroke-dashoffset="-245" />
+                        </svg>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-emerald);">78.2% 非負面討論</div>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>👍 總累積互動量：</span>
+                            <span style="font-weight: 600; color: var(--color-text-primary);">3,408 次</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>💬 總累積留言數：</span>
+                            <span style="font-weight: 600; color: var(--color-text-primary);">2,681 則</span>
+                        </div>
+                    </div>
+                    
+                    <a href="dcard-analysis.html" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 0.9rem;" id="sidebar-cta-btn">
+                        查看完整數據指標
+                    </a>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- --- Footer --- -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <p>© 2026 極客探索日誌. Powered by Firecrawl & Vanilla Stack.</p>
+            <p>
+                <a href="index.html">首頁</a> · 
+                <a href="dcard-analysis.html">Dcard 數據看板</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

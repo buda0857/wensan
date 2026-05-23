@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="世新大學「山洞口」設計介紹，包含實體隧道校門的地標意義以及數位校務資訊系統的整合設計理念。">
+    <title>世新大學「山洞口」設計介紹</title>
+    <style>
+        /* Vanilla CSS with modern aesthetics */
+        :root {
+            --primary: #d32f2f;
+            --primary-light: #ff6659;
+            --secondary: #212121;
+            --bg: #f9fafb;
+            --text: #374151;
+            --text-light: #6b7280;
+        }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+        header { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light)); 
+            color: white; 
+            padding: 5rem 2rem; 
+            text-align: center; 
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        h1 { 
+            margin: 0; 
+            font-size: 2.8rem; 
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.15); 
+            letter-spacing: -0.05em;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: -3rem auto 3rem; 
+            padding: 3rem; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            position: relative;
+            z-index: 1;
+        }
+        h2 { 
+            color: var(--secondary); 
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            border-bottom: 3px solid rgba(211, 47, 47, 0.1); 
+            padding-bottom: 0.5rem; 
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: var(--primary);
+            margin-right: 12px;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+        p { 
+            font-size: 1.15rem; 
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+        strong {
+            color: var(--primary);
+        }
+        .card { 
+            background: #ffffff; 
+            border: 1px solid #e5e7eb;
+            border-left: 5px solid var(--primary); 
+            padding: 2rem; 
+            margin: 2rem 0; 
+            border-radius: 8px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1); 
+            border-left-color: var(--primary-light);
+        }
+        .card h2 {
+            border: none;
+            margin-top: 0;
+        }
+        .card h2::before {
+            display: none;
+        }
+        footer { 
+            text-align: center; 
+            padding: 3rem 2rem; 
+            color: var(--text-light); 
+            font-size: 0.95rem; 
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: -2rem 1rem 2rem;
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>世新大學「山洞口」：實體與數位的交匯</h1>
+        <p>探索世新最具代表性的地標設計與數位入口</p>
+    </header>
+    <div class="container">
+        <section>
+            <h2>設計理念與歷史背景</h2>
+            <p>世新大學的「山洞口」在校內外具有多重深刻含意。從地理與建築的角度來看，由於世新大學位於台北市文山區，校區當初是依山勢鑿山開挖而成，因此在校門口設計了一座特殊的「隧道式校門」。這座隧道不僅是進入校園的必經之路，更成為了世新大學最著名的實體地標。</p>
+        </section>
+
+        <section class="card">
+            <h2>一、實體建築設計：隧道式校門</h2>
+            <p><strong>地形順應與空間美學：</strong> 山洞口的設計巧妙地順應了當地的丘陵地形，將自然環境與校園建築融為一體。穿過幽暗的隧道後，映入眼簾的是豁然開朗的校園景致，這種「桃花源」式的空間體驗，帶給歷屆學生深刻的印象。</p>
+            <p><strong>歷史傳承的象徵：</strong> 山洞口見證了世新從專科時期一路發展為綜合大學的歲月。對無數校友而言，穿過山洞口就象徵著進入學習的殿堂，是世新人共同的集體記憶。</p>
+        </section>
+
+        <section class="card">
+            <h2>二、數位入口設計：「世新山洞口」資訊系統</h2>
+            <p><strong>概念的延伸：</strong> 隨著數位時代的來臨，世新大學將「山洞口」連接校內外的概念延伸至網路世界，推出了名為「世新山洞口」的整合性校務資訊入口網站（Portal）。</p>
+            <p><strong>UI/UX 與功能整合：</strong> 該數位平台集成了選課系統、成績查詢、個人學籍資訊、校園行政服務與活動公告等功能。設計上強調「一站式服務」，讓師生能透過單一登入點快速獲取所需資源，猶如實體山洞口匯聚了所有進出校園的人流一般，數位山洞口匯聚了校園內所有的資訊流。</p>
+        </section>
+
+        <section>
+            <h2>總結</h2>
+            <p>無論是實體的隧道校門，還是虛擬的數位平台，「山洞口」的設計都體現了世新大學「溝通」與「傳播」的核心精神。實體山洞口連接了校園與社會，而數位山洞口則連結了校園生活與便利資訊，兩者共同構成了世新人獨特的校園文化與數位體驗。</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2026 世新大學介紹專案</p>
+    </footer>
+</body>
+</html>

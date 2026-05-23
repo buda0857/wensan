@@ -1,0 +1,14 @@
+# Logs and caches
+**/node_modules/
+**/*.log*
+
+# Scraped cache folders
+**/.firecrawl/
+
+# Environment configurations
+**/.env
+**/*.cache
+
+# Google Analytics Credentials
+**/client_secret.json
+**/user_credentials.json

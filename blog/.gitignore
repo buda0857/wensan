@@ -1,0 +1,9 @@
+# Logs and caches
+node_modules/
+npm-debug.log*
+
+# Scrapes
+.firecrawl/
+
+# Environment Variables
+.env

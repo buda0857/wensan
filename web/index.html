@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文山之美 - 深度探索指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        
+        .img-placeholder {
+            background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585421514738-0179ceb4654c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+        }
+
+        .page-transition { transition: all 0.3s ease-in-out; }
+        .hidden-page { display: none; opacity: 0; }
+        .visible-page { display: block; opacity: 1; animation: fadeIn 0.5s ease-out; }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .detail-p { line-height: 1.8; margin-bottom: 1.5rem; color: #334155; font-size: 1.05rem; }
+        .detail-h3 { font-size: 1.6rem; font-weight: 700; color: #065f46; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #10b981; padding-left: 1rem; }
+        .detail-h4 { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8TVS659RNQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8TVS659RNQ');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-[100] bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center cursor-pointer" onclick="showPage('home')">
+                    <div class="bg-emerald-700 p-1.5 rounded-lg mr-2">
+                        <i class="fas fa-mountain text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-emerald-900">文山之美</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-bold items-center">
+                    <button onclick="showPage('home')" class="hover:text-emerald-600 transition">首頁</button>
+                    <button onclick="showPage('attractions-list')" class="hover:text-emerald-600 transition">私房景點</button>
+                    <button onclick="showPage('hiking-list')" class="hover:text-emerald-600 transition">運動步道</button>
+                    <button onclick="showPage('food-list')" class="hover:text-emerald-600 transition">在地美食</button>
+                    <button onclick="showPage('analysis')" class="bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-lg hover:bg-emerald-100 transition flex items-center border border-emerald-100">
+                        <i class="fas fa-file-alt mr-2"></i>課程報告
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主內容區 -->
+    <main id="main-content" class="pt-16">
+
+        <!-- 首頁 -->
+        <div id="page-home" class="visible-page page-transition">
+            <section class="hero-bg h-[50vh] flex items-center justify-center text-center text-white px-4">
+                <div class="max-w-4xl">
+                    <h1 class="text-5xl md:text-6xl font-extrabold mb-6">看見文山，慢活台北。</h1>
+                    <p class="text-lg md:text-xl font-light mb-10 opacity-90">深度探索隱藏在都市叢林中的自然秘境。</p>
+                    <button onclick="showPage('hiking-list')" class="bg-emerald-600 hover:bg-emerald-700 px-10 py-4 rounded-full font-bold transition-all shadow-xl">探索健行路線</button>
+                </div>
+            </section>
+
+            <!-- 快速導覽卡片 -->
+            <section class="py-16 max-w-7xl mx-auto px-4">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-10 bg-white rounded-3xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="showPage('attractions-list')">
+                        <i class="fas fa-camera text-3xl text-emerald-600 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4">私房景點</h3>
+                        <p class="text-slate-500">貓空、望遠亭與在地百年古蹟。</p>
+                    </div>
+                    <div class="p-10 bg-white rounded-3xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="showPage('hiking-list')">
+                        <i class="fas fa-hiking text-3xl text-blue-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4">運動步道</h3>
+                        <p class="text-slate-500">仙跡岩、政大後山與樟樹步道全攻略。</p>
+                    </div>
+                    <div class="p-10 bg-white rounded-3xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="showPage('food-list')">
+                        <i class="fas fa-utensils text-3xl text-orange-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4">在地美食</h3>
+                        <p class="text-slate-500">木柵鐵觀音特色餐與政大周邊隱藏版美食。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 精選影片 -->
+            <section class="py-16 bg-white border-t border-slate-100">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-8 text-slate-800">探索文山之美</h2>
+                    <div class="w-full">
+                        <iframe id="yt-video" class="w-full h-[300px] sm:h-[450px] md:h-[500px] rounded-3xl shadow-lg" src="https://www.youtube.com/embed/JCOLvtsrc2Q?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 課程報告頁面 -->
+        <div id="page-reports" class="hidden-page page-transition">
+            <section class="relative h-[30vh] flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="./images/ptt_analysis_hero.png" class="absolute inset-0 w-full h-full object-cover brightness-50">
+                <div class="relative z-10 max-w-4xl px-4">
+                    <h1 class="text-4xl md:text-5xl font-black mb-4">課程研究報告</h1>
+                    <p class="text-lg opacity-80 font-light">整合網路爬蟲與數據分析，呈現深度的在地化研究。</p>
+                </div>
+            </section>
+
+            <section class="py-16 max-w-7xl mx-auto px-4">
+
+                <!-- 子標籤列 -->
+                <div class="flex gap-3 mb-12 flex-wrap">
+                    <button id="tab-ptt" onclick="switchReportTab('ptt')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-emerald-600 text-white shadow">
+                        <i class="fas fa-database mr-2"></i>PTT 大數據分析
+                    </button>
+                    <button id="tab-ga4" onclick="switchReportTab('ga4')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200">
+                        <i class="fas fa-chart-line mr-2"></i>GA4 流量報告
+                    </button>
+                    <button id="tab-dcard" onclick="switchReportTab('dcard')" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200">
+                        <i class="fas fa-comments mr-2"></i>Dcard 輿情分析
+                    </button>
+                </div>
+
+                <!-- 子頁面：PTT 分析 -->
+                <div id="report-tab-ptt">
+                <div class="mb-12 border-b border-slate-200 pb-8">
+                    <div class="inline-block bg-emerald-600 text-white px-4 py-1 rounded-lg text-sm font-bold mb-4">專案報告 01</div>
+                    <h2 class="text-3xl font-bold text-slate-800">PTT Food 版趨勢大數據分析</h2>
+                    <p class="text-slate-500 mt-2">研究對象：批踢踢實業坊 Food 看板近期熱門內容</p>
+                </div>
+
+                <!-- 總結卡片 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <p class="text-slate-400 text-sm font-bold mb-1">分析文章總數</p>
+                        <h4 class="text-3xl font-black text-emerald-600">45 <span class="text-sm text-slate-300">篇</span></h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <p class="text-slate-400 text-sm font-bold mb-1">食記佔比</p>
+                        <h4 class="text-3xl font-black text-blue-600">73 <span class="text-sm text-slate-300">%</span></h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <p class="text-slate-400 text-sm font-bold mb-1">熱門地區</p>
+                        <h4 class="text-3xl font-black text-orange-600">台北</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <p class="text-slate-400 text-sm font-bold mb-1">最新更新</p>
+                        <h4 class="text-lg font-bold text-slate-700">2026/05/15</h4>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-10">
+                    <!-- 圖表 1: 分類比例 -->
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold mb-8 flex items-center">
+                            <i class="fas fa-pie-chart text-emerald-600 mr-3"></i>文章類型分佈
+                        </h3>
+                        <div class="h-[300px] flex items-center justify-center">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 圖表 2: 地區排行 -->
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold mb-8 flex items-center">
+                            <i class="fas fa-map-marker-alt text-red-500 mr-3"></i>熱門美食地區
+                        </h3>
+                        <div class="h-[300px]">
+                            <canvas id="regionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 關鍵字雲 -->
+                <div class="mt-10 bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-8 flex items-center">
+                            <i class="fas fa-tags text-emerald-400 mr-3"></i>近期熱門關鍵字 <span class="text-xs font-normal text-slate-500 ml-4">(點擊關鍵字查看摘要)</span>
+                        </h3>
+                        <div class="flex flex-wrap gap-4" id="keywordCloud">
+                            <!-- JS Will fill this -->
+                        </div>
+                    </div>
+                    <i class="fas fa-quote-right absolute -bottom-10 -right-10 text-[15rem] text-white/5 italic"></i>
+                </div>
+
+                <!-- 關鍵字摘要 Modal -->
+                <div id="keyword-modal" class="fixed inset-0 z-[120] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+                    <div class="bg-white text-slate-900 w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-95 transition-all duration-300" id="keyword-modal-content">
+                        <div class="p-8 md:p-10">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-bold" id="kw-tag">關鍵字</div>
+                                <button onclick="closeKeywordSummary()" class="text-slate-400 hover:text-slate-600 transition"><i class="fas fa-times text-xl"></i></button>
+                            </div>
+                            <h3 id="kw-title" class="text-3xl font-black mb-4">關鍵字名稱</h3>
+                            <div class="w-12 h-1 bg-emerald-500 mb-6 rounded-full"></div>
+                            <div id="kw-summary" class="text-slate-600 leading-relaxed text-lg mb-8">
+                                這裡會顯示關於該關鍵字的 PTT 討論摘要內容。
+                            </div>
+                            <button onclick="closeKeywordSummary()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-4 rounded-2xl transition">關閉視窗</button>
+                        </div>
+                    </div>
+                </div>
+                </div><!-- end report-tab-ptt -->
+
+                <!-- 子頁面：GA4 流量 -->
+                <div id="report-tab-ga4" class="hidden">
+                    <div class="mb-12 border-b border-slate-200 pb-8">
+                        <div class="inline-block bg-blue-600 text-white px-4 py-1 rounded-lg text-sm font-bold mb-4">專案報告 02</div>
+                        <h2 class="text-3xl font-bold text-slate-800">網站流量監控與 GA4 數據整合</h2>
+                        <p class="text-slate-500 mt-2">研究主題：本網站成立至今的實際訪客互動數據與串接技術解析</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-10">
+                        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <h3 class="text-xl font-bold mb-6 flex items-center">
+                                <i class="fas fa-chart-line text-blue-500 mr-3"></i>歷史流量摘要 <span class="text-sm font-normal text-slate-400 ml-2">(截至 2026/05)</span>
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                                    <span class="text-slate-500 font-bold">活躍使用者 (Active Users)</span>
+                                    <span class="text-2xl font-black text-slate-800">4 <span class="text-sm font-normal text-slate-400">人</span></span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                                    <span class="text-slate-500 font-bold">總瀏覽量 (Page Views)</span>
+                                    <span class="text-2xl font-black text-slate-800">26 <span class="text-sm font-normal text-slate-400">次</span></span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                                    <span class="text-slate-500 font-bold">事件觸發數 (Event Count)</span>
+                                    <span class="text-2xl font-black text-slate-800">79 <span class="text-sm font-normal text-slate-400">次</span></span>
+                                </div>
+                            </div>
+                            <div class="mt-8 p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                                <h4 class="font-bold text-blue-800 mb-2">💡 數據洞察</h4>
+                                <p class="text-sm text-blue-700/80 leading-relaxed">
+                                    數據顯示雖然目前的訪客母體人數不多，但使用者的「互動深度」表現優異。平均每位訪客在站內產生了約 6.5 頁的瀏覽記錄與將近 20 次的事件互動。這意味著來到網站的使用者確實對「文山之美」的內容產生了高度興趣，並積極探索了多個不同的景點與報告頁面。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col">
+                            <h3 class="text-xl font-bold mb-6 flex items-center">
+                                <i class="fas fa-code text-indigo-500 mr-3"></i>GA4 串接技術與開發架構
+                            </h3>
+                            <div class="space-y-6 text-slate-600 leading-relaxed flex-grow">
+                                <div>
+                                    <h4 class="font-bold text-slate-800 mb-1 flex items-center"><span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs mr-2">1</span>前端追蹤與客製化事件</h4>
+                                    <p class="text-sm pl-8">網頁內嵌了 GA4 追蹤碼 (G-8TVS659RNQ)，並深度整合了 <code>YouTube IFrame API</code>。當使用者在首頁觀看「探索文山之美」影片時，JavaScript 會自動向 GA4 發送名為 <strong>「感興趣的使用者」</strong> 的自訂事件，精準定位潛在客群。</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 mb-1 flex items-center"><span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs mr-2">2</span>後端 Data API 自動化</h4>
+                                    <p class="text-sm pl-8">有別於傳統的人工查閱報表，本專案透過 Python 的 <code>google-analytics-data</code> 函式庫搭配 OAuth 憑證，實現從伺服器端自動化拉取歷史流量數據的功能，讓開發者能直接取得第一手報表。</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 mb-1 flex items-center"><span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs mr-2">3</span>數據驅動的閉環設計</h4>
+                                    <p class="text-sm pl-8">透過本次整合，我們完成了「建立優質內容 &rarr; 實作流量追蹤 &rarr; 數據獲取與視覺化」的完整閉環 (Closed-loop) 專案生命週期，充分展現現代化 Web 開發的 Data-driven 精神。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end report-tab-ga4 -->
+
+                <!-- 子頁面：Dcard 輿情分析 -->
+                <div id="report-tab-dcard" class="hidden">
+                    <div class="mb-12 border-b border-slate-200 pb-8">
+                        <div class="inline-block bg-purple-600 text-white px-4 py-1 rounded-lg text-sm font-bold mb-4">專案報告 03</div>
+                        <h2 class="text-3xl font-bold text-slate-800">Dcard 閒聊板輿情大數據分析</h2>
+                        <p class="text-slate-500 mt-2">研究對象：Dcard 閒聊板 (Talk) 最新熱門貼文輿情極性與關鍵詞分析</p>
+                    </div>
+
+                    <!-- 總結卡片 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">分析貼文總數</p>
+                            <h4 class="text-3xl font-black text-purple-600">55 <span class="text-sm text-slate-300">篇</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">累計按讚互動</p>
+                            <h4 class="text-3xl font-black text-emerald-600">3,408 <span class="text-sm text-slate-300">次</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">累計留言討論</p>
+                            <h4 class="text-3xl font-black text-blue-600">2,681 <span class="text-sm text-slate-300">則</span></h4>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <p class="text-slate-400 text-sm font-bold mb-1">非負面情緒佔比</p>
+                            <h4 class="text-3xl font-black text-pink-600">78.2 <span class="text-sm text-slate-300">%</span></h4>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-10">
+                        <!-- 圖表 3: Dcard 情緒 -->
+                        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <h3 class="text-xl font-bold mb-8 flex items-center">
+                                <i class="fas fa-smile text-purple-600 mr-3"></i>卡友輿論情緒分佈
+                            </h3>
+                            <div class="h-[300px] flex items-center justify-center">
+                                <canvas id="dcardSentimentChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 圖表 4: Dcard 文字雲 -->
+                        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col items-center">
+                            <h3 class="text-xl font-bold mb-6 flex items-center w-full">
+                                <i class="fas fa-cloud text-blue-500 mr-3"></i>熱門關鍵詞文字雲
+                            </h3>
+                            <div class="w-full flex-grow flex items-center justify-center p-2 bg-slate-900 rounded-3xl overflow-hidden shadow-inner">
+                                <img src="./images/dcard-wordcloud.png" class="max-h-[240px] w-auto object-contain hover:scale-105 transition-all duration-300" alt="Dcard Wordcloud">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 關鍵字雲 (熱詞排名前 30) -->
+                    <div class="mt-10 bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold mb-8 flex items-center">
+                                <i class="fas fa-tags text-purple-400 mr-3"></i>Dcard 熱門詞彙提及頻次 <span class="text-xs font-normal text-slate-500 ml-4">(提及次數)</span>
+                            </h3>
+                            <div class="flex flex-wrap gap-4" id="dcardKeywordCloud">
+                                <!-- JS Will fill this -->
+                            </div>
+                        </div>
+                        <i class="fas fa-quote-right absolute -bottom-10 -right-10 text-[15rem] text-white/5 italic"></i>
+                    </div>
+
+                    <!-- Dcard Posts明細 & Filter -->
+                    <div class="mt-10 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                        <h3 class="text-2xl font-bold mb-6 text-slate-800 flex items-center">
+                            <i class="fas fa-list-ul text-emerald-600 mr-3"></i>貼文情感極性分析明細
+                        </h3>
+                        
+                        <!-- Search and Filter Bar -->
+                        <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-8">
+                            <div class="relative flex-grow">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-search"></i></span>
+                                <input type="text" id="dcard-search" oninput="filterDcardPosts()" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-emerald-500 text-sm" placeholder="搜尋貼文標題或內文摘要...">
+                            </div>
+                            <div class="flex gap-2 flex-wrap">
+                                <button onclick="filterDcardTab('All')" class="dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-purple-600 text-white shadow" id="dcard-btn-All">全部</button>
+                                <button onclick="filterDcardTab('Positive')" class="dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-500 hover:bg-slate-200" id="dcard-btn-Positive">正向</button>
+                                <button onclick="filterDcardTab('Neutral')" class="dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-500 hover:bg-slate-200" id="dcard-btn-Neutral">中立</button>
+                                <button onclick="filterDcardTab('Negative')" class="dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-500 hover:bg-slate-200" id="dcard-btn-Negative">負向</button>
+                            </div>
+                        </div>
+
+                        <!-- Posts List Container -->
+                        <div id="dcard-posts-list" class="grid md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2">
+                            <!-- JS Will fill this -->
+                        </div>
+                    </div>
+
+                </div><!-- end report-tab-dcard -->
+
+            </section>
+        </div>
+
+
+
+        <!-- 列表頁面 -->
+        <div id="page-list-view" class="hidden-page page-transition py-16">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-end mb-12 border-b pb-8">
+                    <h2 id="list-title" class="text-4xl font-black text-slate-800">運動步道</h2>
+                    <button onclick="showPage('home')" class="text-emerald-600 font-bold"><i class="fas fa-chevron-left mr-2"></i>返回</button>
+                </div>
+                <div id="list-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+            </div>
+        </div>
+
+        <!-- 詳細內容頁面 -->
+        <div id="page-detail" class="hidden-page page-transition py-12">
+            <div class="max-w-5xl mx-auto px-4">
+                <button onclick="goBackToList()" class="mb-8 text-slate-500 hover:text-emerald-600 transition flex items-center font-bold text-lg">
+                    <i class="fas fa-arrow-left mr-3"></i> 返回列表
+                </button>
+                <div id="detail-content" class="bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100"></div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <footer class="bg-slate-900 text-white py-12 text-center mt-20">
+        <p class="text-slate-500 text-sm font-medium">© 2026 文山之美深度探索指南</p>
+        <p class="text-slate-600 text-xs mt-2">版本：2026.05.15.1712 (已移除登入功能)</p>
+    </footer>
+
+    <script>
+        const data = {
+            attractions: [
+                {
+                    id: 'maokong',
+                    title: '貓空望遠亭',
+                    category: '自然景點',
+                    short: '俯瞰台北盆地的「攝影師私藏」制高點。',
+                    img: 'https://images.unsplash.com/photo-1541014163-95801c80387d?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">景點特色：城市邊緣的靜謐之窗</h3>
+                        <p class="detail-p">望遠亭位於木柵老泉街山頂，是遠離鬧區、享受孤獨景致的最佳去處。這裡不僅可以完整收納台北101與城市天際線，腳下蜿蜒的國道三號光跡更是夜晚攝影愛好者的最愛。</p>
+                    `,
+                    transport: '老泉街45巷底。',
+                    hours: '24小時'
+                },
+                {
+                    id: 'shihhsin',
+                    title: '世新大學',
+                    category: '人文景點',
+                    short: '依山傍水的美麗校園，台灣傳播領域的頂尖學府。',
+                    img: './images/世新大學.jpg',
+                    content: `
+                        <h3 class="detail-h3">景點特色：濃厚的學術與藝術氣息</h3>
+                        <p class="detail-p">世新大學位於景美溪畔，背倚仙跡岩，著名的「山洞口」是世新人的共同記憶。漫步於依山而建的校園內，可以感受到濃厚的傳播、藝術與人文氣息，是文山區極具代表性的教育地標。</p>
+                        <h3 class="detail-h3">周邊順遊</h3>
+                        <p class="detail-p">參觀完校園後，可順道步行至附近的景美夜市品嚐在地小吃，或是從校園後方的登山口直通仙跡岩親山步道。</p>
+                    `,
+                    transport: '捷運景美站 2 號出口，轉乘公車或步行約 15 分鐘。',
+                    hours: '一般校園開放時間'
+                },
+                {
+                    id: 'zhinan',
+                    title: '指南宮（天下第一靈山）',
+                    category: '人文景點',
+                    short: '祈福與賞景兼具的百年道教聖地。',
+                    img: 'https://images.unsplash.com/photo-1552528761-008031d2da28?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">景點特色：宏偉的宗教建築與無敵夜景</h3>
+                        <p class="detail-p">指南宮是台灣知名的道教聖地，主祀呂洞賓。不僅建築宏偉，從廟前廣場俯瞰台北盆地的視野更是絕佳。近年來經過整理，周邊環境清幽，非常適合半日遊。</p>
+                    `,
+                    transport: '搭乘貓空纜車至「指南宮站」或搭乘公車 530、棕5。',
+                    hours: '06:00 - 20:00'
+                },
+                {
+                    id: 'gondola',
+                    title: '貓空纜車',
+                    category: '特色體驗',
+                    short: '台北都會區唯一的纜車系統，鳥瞰茶園與城市。',
+                    img: 'https://images.unsplash.com/photo-1546995000-bc10fb3377dc?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">景點特色：高空俯瞰文山之美</h3>
+                        <p class="detail-p">貓空纜車全長 4.03 公里，是前往貓空最便利且最具特色的交通方式。沿途可以欣賞滿山綠意，若搭乘底部透明的「水晶車廂」，更能體驗高空遨遊的刺激感。</p>
+                    `,
+                    transport: '捷運動物園站轉乘貓空纜車。',
+                    hours: '依台北捷運公司公告為準'
+                },
+                {
+                    id: 'shutunnel',
+                    title: '世新大學「山洞口」',
+                    category: '特色地標',
+                    short: '世新最具代表性的實體隧道校門與數位入口平台，實體與數位的交匯。',
+                    img: './images/世新大學.jpg',
+                    content: `
+                        <h3 class="detail-h3">一、實體建築設計：隧道式校門</h3>
+                        <p class="detail-p"><strong>地形順應與空間美學：</strong> 山洞口的設計巧妙地順應了當地的丘陵地形，將自然環境與校園建築融為一體。穿過幽暗的隧道後，映入眼簾的是豁然開朗的校園景致，這種「桃花源」式的空間體驗，帶給歷屆學生深刻的印象。</p>
+                        <p class="detail-p"><strong>歷史傳承的象徵：</strong> 山洞口見證了世新從專科時期一路發展為綜合大學的歲月。對無數校友而言，穿過山洞口就象徵著進入學習的殿堂，是世新人共同的集體記憶。</p>
+                        <h3 class="detail-h3">二、數位入口設計：「世新山洞口」</h3>
+                        <p class="detail-p"><strong>概念的延伸：</strong> 隨著數位時代的來臨，世新大學將「山洞口」連接校內外的概念延伸至網路世界，推出了名為「世新山洞口」的整合性校務資訊入口網站。</p>
+                        <p class="detail-p"><strong>UI/UX 與功能整合：</strong> 該數位平台集成了選課系統、成績查詢、個人學籍資訊、校園行政服務與活動公告等功能。猶如實體山洞口匯聚了進出校園的人流一般，數位山洞口匯聚了校園內所有的資訊流。</p>
+                    `,
+                    transport: '捷運景美站 2 號出口，轉乘公車或步行約 15 分鐘。',
+                    hours: '實體校園依規定時間開放 / 數位平台 24 小時服務'
+                }
+            ],
+            hiking: [
+                {
+                    id: 'xianji',
+                    title: '仙跡岩親山步道',
+                    category: '步道',
+                    difficulty: '★☆☆☆☆ (輕鬆入門)',
+                    time: '約 1.5 - 2 小時',
+                    short: '景美地標，尋找神仙呂洞賓留下的足跡石，俯瞰最美窗景。',
+                    img: './images/仙跡岩1.JPG',
+                    content: `
+                        <h3 class="detail-h3">步道亮點：市中心旁的森林氧吧</h3>
+                        <p class="detail-p">仙跡岩又稱「溪子口山」，是文山區最受居民歡迎的健行路線。整座山高度雖然僅 144 公尺，但因其獨立山頭的地理位置，視野驚人地開闊。步道路面鋪設完善，大多為木棧道或石階，即使是健行初學者也能輕鬆駕馭。</p>
+                        
+                        <h4 class="detail-h4">一、傳說中的「仙跡」石</h4>
+                        <p class="detail-p">來到山頂，絕對不能錯過那塊著名的「仙跡石」。傳說八仙之一的呂洞賓曾在此留下腳印。雖然真跡目前被圍欄保護，但石壁上的紋路依然讓人充滿想像。這裡也是當地信仰的中心，山腰處的景美仙跡岩（慈安宮）香火鼎盛，環境清幽。</p>
+
+                        <h4 class="detail-h4">二、網美必拍：懸崖樹與城市窗景</h4>
+                        <p class="detail-p">仙跡岩最出名的莫過於那棵橫斜出的「網美樹」。站在此處（請務必注意安全，不可攀爬），遠方的台北 101 與密集的景美市區構成了一幅絕佳的對比圖，是社群媒體上文山區點閱率最高的打卡點。</p>
+
+                        <h3 class="detail-h3">深度遊攻略：推薦行走路線</h3>
+                        <p class="detail-p">仙跡岩登山口眾多，推薦以下兩條路線：</p>
+                        <ul class="list-disc pl-5 detail-p space-y-2">
+                            <li><strong>景興街主入口：</strong>路徑最寬敞，階梯雖多但平整，適合親子同行。</li>
+                            <li><strong>海巡署後山入口：</strong>路徑較為原始，充滿森林感，適合喜歡尋幽訪勝的人。</li>
+                        </ul>
+                        
+                        <h3 class="detail-h3">生態寶庫：城市裡的動植物園</h3>
+                        <p class="detail-p">這裡擁有豐富的次生林生態，清晨時分可以聽見綠繡眼、五色鳥的鳴叫，甚至偶爾能瞥見松鼠在樹間躍動。夏秋之際，步道旁的蝴蝶翩翩起舞，是帶領孩子進行自然觀察的最佳課本。</p>
+                    `,
+                    transport: '捷運景美站 2 號出口，步行約 5-10 分鐘即可抵達景興街登山口。',
+                    hours: '全天開放（建議傍晚前下山）',
+                    recommend: '建議在日落前一小時上山，可以同時捕捉到夕陽金輝與台北城點燈後的夜景。',
+                    points: ['仙跡石', '景美展望台', '網美懸崖樹', '慈安宮']
+                },
+                {
+                    id: 'camphor',
+                    title: '樟樹步道',
+                    category: '步道',
+                    difficulty: '★☆☆☆☆ (輕鬆入門)',
+                    time: '約 1 小時',
+                    short: '貓空地區最平緩的步道，季節限定的魯冰花海。',
+                    img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b4b0?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">步道亮點：老少咸宜的農村風情</h3>
+                        <p class="detail-p">樟樹步道是一條結合農村意象與自然生態的平緩步道。步道兩旁除了茶園，還能見到穀倉、牛車等傳統農村元素，非常適合親子同遊。</p>
+                        <h3 class="detail-h3">花海美景</h3>
+                        <p class="detail-p">每年春季，這裡會開滿黃澄澄的魯冰花；秋季則有波斯菊，花海與遠處的山景相映成趣，是絕佳的拍照地點。</p>
+                    `,
+                    transport: '搭乘貓纜至「貓空站」，步行約 5 分鐘抵達步道口。',
+                    hours: '全天開放',
+                    recommend: '花季時人潮眾多，建議平日或清晨前往。'
+                }
+            ],
+            food: [
+                {
+                    id: 'tieguanyin',
+                    title: '木柵鐵觀音特色餐',
+                    category: '在地美食',
+                    short: '傳承百年的濃郁茶香，搭配特色茶餐點。',
+                    img: 'https://images.unsplash.com/photo-1563822249548-f81be78262f3?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">百年茶香：以茶入菜的獨特風味</h3>
+                        <p class="detail-p">木柵是台灣鐵觀音的主要產區，貓空山區更是茶坊林立。許多茶坊不僅提供品茗，更將鐵觀音入菜，如茶油麵線、茶葉燉雞湯、茶香煎蛋等，是來到貓空不可錯過的美食體驗。</p>
+                    `,
+                    transport: '貓空山區各茶坊。',
+                    hours: '依各茶坊營業時間，多數營業至深夜或凌晨。'
+                },
+                {
+                    id: 'catrui',
+                    title: '貓蕊 Cat Cafe',
+                    category: '在地美食',
+                    short: '鄰近世新大學的溫馨貓咪主題餐廳，享受美味早午餐與療癒時光。',
+                    img: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">景點特色：療癒的貓咪與美食饗宴</h3>
+                        <p class="detail-p">位於世新大學與考試院附近的「貓蕊 Cat Cafe」，是一間充滿溫馨氣息的貓咪主題餐廳。店內有多隻可愛的店貓陪伴，環境整潔舒適，是愛貓人士的天堂。</p>
+                        <p class="detail-p">餐點選擇豐富，供應特色的貓咪造型吐司早午餐、美式手工漢堡、義大利麵，以及貓咪造型香草籽布丁等精緻甜點。非常適合朋友聚餐，享受被貓咪包圍的悠閒午後。</p>
+                    `,
+                    transport: '台北市文山區試院路 34 號（近世新大學、考試院）。',
+                    hours: '週一至週六 11:00～20:00（週日公休）。'
+                },
+                {
+                    id: 'qiurong',
+                    title: '秋榮自助餐',
+                    category: '在地美食',
+                    short: '考試院周邊的高CP值平價自助餐，學生與上班族的最愛。',
+                    img: 'https://images.unsplash.com/photo-1590846406792-0adc7f138fbc?auto=format&fit=crop&w=1200&q=80',
+                    content: `
+                        <h3 class="detail-h3">景點特色：在地人的高CP值食堂</h3>
+                        <p class="detail-p">位於考試院周邊的「秋榮自助餐」，是世新大學學生與附近上班族群的隱藏版愛店。這裡以平易近人的價格、豐富多樣的家常菜色而聞名，每天都有新鮮現做的各式佳餚。</p>
+                        <p class="detail-p">不論是經典的主菜如炸排骨、滷肉，或是多樣化的清炒時蔬，都能讓人以實惠的價格飽餐一頓，是在地人解決日常三餐的熱門首選。</p>
+                    `,
+                    transport: '台北市文山區（鄰近考試院、世新大學周邊）。',
+                    hours: '午晚餐時段營業。'
+                }
+            ]
+        };
+
+        function showPage(pageId) {
+            // 先隱藏所有頁面區塊
+            const pages = ['page-home', 'page-reports', 'page-list-view', 'page-detail'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('hidden-page');
+                    el.classList.remove('visible-page');
+                }
+            });
+
+            // 顯示對應頁面
+            if (pageId === 'home') {
+                const el = document.getElementById('page-home');
+                if (el) { el.classList.remove('hidden-page'); el.classList.add('visible-page'); }
+            } else if (pageId === 'analysis') {
+                const el = document.getElementById('page-reports');
+                if (el) { 
+                    el.classList.remove('hidden-page'); el.classList.add('visible-page'); 
+                    initAnalysisCharts();
+                    switchReportTab('ptt'); // 預設顯示 PTT 標籤
+                }
+            } else if (pageId.endsWith('-list')) {
+                const category = pageId.split('-')[0];
+                renderList(category);
+                const el = document.getElementById('page-list-view');
+                if (el) { el.classList.remove('hidden-page'); el.classList.add('visible-page'); }
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function switchReportTab(tab) {
+            const pttContent = document.getElementById('report-tab-ptt');
+            const ga4Content = document.getElementById('report-tab-ga4');
+            const dcardContent = document.getElementById('report-tab-dcard');
+            
+            const pttBtn = document.getElementById('tab-ptt');
+            const ga4Btn = document.getElementById('tab-ga4');
+            const dcardBtn = document.getElementById('tab-dcard');
+
+            // Hide all
+            pttContent.classList.add('hidden');
+            ga4Content.classList.add('hidden');
+            dcardContent.classList.add('hidden');
+            
+            // Set inactive button styles
+            pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+            dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-slate-100 text-slate-500 hover:bg-slate-200';
+
+            if (tab === 'ptt') {
+                pttContent.classList.remove('hidden');
+                pttBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-emerald-600 text-white shadow';
+            } else if (tab === 'ga4') {
+                ga4Content.classList.remove('hidden');
+                ga4Btn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-blue-600 text-white shadow';
+            } else if (tab === 'dcard') {
+                dcardContent.classList.remove('hidden');
+                dcardBtn.className = 'px-6 py-2.5 rounded-xl font-bold text-sm transition-all bg-purple-600 text-white shadow';
+                initDcardDataView();
+            }
+        }
+
+        // --- Embedded Dcard NLP Structured Analysis Dataset ---
+        const dcardAnalysisData = {
+            overall: {
+                total_posts: 55,
+                total_likes: 3408,
+                total_comments: 2681,
+                sentiment_distribution: {
+                    Positive: 21,
+                    Neutral: 22,
+                    Negative: 12
+                }
+            },
+            top_keywords: [
+                {text: "可以", value: 11}, {text: "台灣", value: 10}, {text: "官方", value: 10},
+                {text: "討論", value: 9}, {text: "有人", value: 8}, {text: "他們", value: 8},
+                {text: "這樣", value: 7}, {text: "最近", value: 7}, {text: "政治", value: 6},
+                {text: "時事", value: 6}, {text: "時間", value: 6}, {text: "文化", value: 5},
+                {text: "分享", value: 5}, {text: "直接", value: 5}, {text: "野外", value: 5},
+                {text: "情感", value: 5}, {text: "這種", value: 5}, {text: "一下", value: 5},
+                {text: "超商", value: 5}, {text: "一定", value: 4}, {text: "不好", value: 4},
+                {text: "醫學", value: 4}, {text: "房貸", value: 4}, {text: "完全", value: 4},
+                {text: "小孩", value: 4}, {text: "機車", value: 4}, {text: "問題", value: 4},
+                {text: "認真", value: 4}, {text: "朋友", value: 4}, {text: "本來", value: 4}
+            ],
+            posts: [
+                {
+                    id: 1,
+                    title: "喊出✨大學必做的事✨拿 5000 元夢想基金再讓 Dcard Video 陪你圓夢❤️‍🔥 #夢想派送計畫",
+                    snippet: "大學是個很奇妙的地方🏫，長到可以修完 128 學分、熬夜 87 次、愛上 2 個人、後悔無數件事💔，卻又短到一轉眼就結束了💫，上大學前許願想完成的事，你都做了嗎？有些事，再不做就真的沒機會了🫵...",
+                    link: "https://www.dcard.tw/f/talk",
+                    likes: 765,
+                    comments: 359,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 2,
+                    title: "#集中討論 文化幣邀請碼分享",
+                    snippet: "近日因文化幣發送，我們發現站上有許多人會分享邀請碼以賺取更多文化幣，小天使特地開此討論串，讓大家能夠盡情分享邀請碼！在發送你的邀請碼前，請務必注意相關全站規範...",
+                    link: "https://www.dcard.tw/f/talk",
+                    likes: 380,
+                    comments: 550,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 3,
+                    title: "#公告 時事、政治相關議題請至時事板發表",
+                    snippet: "各位卡友們好，我們始終努力維持一個友善的討論環境，並鼓勵大家到各個看板討論符合板旨的議題；由於近期有許多政治類型的討論文章發表在閒聊板中，請各位卡友留意...",
+                    link: "https://www.dcard.tw/f/talk",
+                    likes: 309,
+                    comments: 580,
+                    sentiment: "Positive",
+                    sentiment_score: 0.7
+                },
+                {
+                    id: 4,
+                    title: "嘴擎天崗五分鐘一定沒玩過",
+                    snippet: "野砲五分鐘其實不短了，在外面享受的是刺激的爽感，隨時都有可能被發現，誰跟你慢慢做啊🤣，當然是速戰速決，我自己跟另一半也是很常在野外，時間基本都不超過五分鐘，但在床上根本不可能那麼短，野外也不好換姿勢...",
+                    link: "https://www.dcard.tw/f/talk/p/261522605",
+                    likes: 298,
+                    comments: 100,
+                    sentiment: "Positive",
+                    sentiment_score: 0.7
+                },
+                {
+                    id: 5,
+                    title: "NONO 要入獄了",
+                    snippet: "NONO 因涉性侵猥褻 6 女其中一案成立，依強制性交未遂判 2 年 6 個月，昨天上訴期限正式屆滿，台灣高等檢察署決定不再提上訴，說二審判決沒有違背法令，希望判決早日確定、讓他入監服刑...",
+                    link: "https://www.dcard.tw/f/talk/p/261523599",
+                    likes: 360,
+                    comments: 91,
+                    sentiment: "Negative",
+                    sentiment_score: 0.2
+                },
+                {
+                    id: 6,
+                    title: "擎天崗野戰情侶到案了",
+                    snippet: "上週擎天崗直播野戰的事，這兩天終於有後續了，兩人在 17 日低調前往警局製作筆錄，也坦承自己就是影片中的男女主角，據說一開始男方說要請假去，後來又沒出現，最後才終於去了，兩人都說不知道現場有攝影機...",
+                    link: "https://www.dcard.tw/f/talk/p/261524325",
+                    likes: 289,
+                    comments: 51,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 7,
+                    title: "台男霸迎女同學：吃我的屌",
+                    snippet: "台北市一名國中三年級女學生，長期遭受同班男同學言語霸凌及性騷擾，17日會考中午時，男同學竟在考場開黃腔，甚至嗆「吃我的Ｘ」，女學生憤而揍對方肚子一拳，未料男同學隨即反擊，不僅將她踢倒在地，更出拳毆打臉部至少三拳...",
+                    link: "https://www.dcard.tw/f/talk/p/261522678",
+                    likes: 175,
+                    comments: 69,
+                    sentiment: "Negative",
+                    sentiment_score: 0.2
+                },
+                {
+                    id: 8,
+                    title: "不小心看到送肉粽怎麼辦",
+                    snippet: "如題，近期實在太多相關文章了，剛剛無聊滑脆，結果有網友去朝聖 甚至把畫面拍下來，然後我看到了好像，不過只看到喵到道士，我應該做些什麼嗎。。。網路上看到也算嗎，我保持敬畏的心但還是怕怕的不知道怎麼辦..",
+                    link: "https://www.dcard.tw/f/talk/p/261519798",
+                    likes: 71,
+                    comments: 141,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 9,
+                    title: "2027 年的連假出來了",
+                    snippet: "全年總放假日 121 天！！！，而且有 9 個 3天以上的連假，春節連休 7 天，今年還沒過一半，已經開始期待明年了，不說了我要先來安排出國（？",
+                    link: "https://www.dcard.tw/f/talk/p/261524534",
+                    likes: 87,
+                    comments: 15,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 10,
+                    title: "一回到家，直接砲轟警局",
+                    snippet: "是這樣的，回到家我發現我的東西全部被環保局清運掉，是的，我被檢舉，但我只是把東西堆家門口，因為，租屋處空間很小，實在堆不了太多東西。看到被舉發，我很傻眼，是怎樣？我是把東西放路中間還是擋消防通道？",
+                    link: "https://www.dcard.tw/f/talk/p/261520344",
+                    likes: 48,
+                    comments: 88,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 11,
+                    title: "北市中山死亡車禍！無照男持影本租車撞死騎士　還是違規大戶積欠40張罰單",
+                    snippet: "北市中山區吉林路與長春路口19日上午8時許發生一起死亡車禍事故。一名黃姓男子駕駛租賃車輛行經該處時，與一名許姓騎士發生擦撞，強大撞擊力道當場造成許姓騎士被撞飛，緊急送醫後仍不幸不治...",
+                    link: "https://www.dcard.tw/f/talk/p/261522258",
+                    likes: 82,
+                    comments: 47,
+                    sentiment: "Negative",
+                    sentiment_score: 0.0
+                },
+                {
+                    id: 12,
+                    title: "台大台男：憑實力把男宿住成女宿",
+                    snippet: "台大男宿的台男有福了，憑藉實力直接把男宿打造住成女宿的風格在網路上引起熱議...",
+                    link: "https://www.dcard.tw/f/talk/p/261525226",
+                    likes: 61,
+                    comments: 17,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 13,
+                    title: "被鬼壓床原本要去拜拜，後來才發現是我有病",
+                    snippet: "各位…，我前幾天真的以為自己要被帶走😢，現在還餘悸猶存，那天只是加班加比較晚，回家洗好澡就直接躺平，結果半夜突然半夢半醒，感覺醒了 但整個人又完全動不了，還一直聽到有人在叫我，胸口超悶 像被壓住...",
+                    link: "https://www.dcard.tw/f/talk/p/261523709",
+                    likes: 43,
+                    comments: 11,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 14,
+                    title: "每個月5千還是不想生",
+                    snippet: "補，只有我覺得大家厭童，絕大部分是被狼性職場搞出來的嗎，以前我都覺得有小孩的人，一定是家裡後院有石油的那種人，所以在路上看到親子，總覺得這是某種炫耀行為...",
+                    link: "https://www.dcard.tw/f/talk/p/261520789",
+                    likes: 30,
+                    comments: 86,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 15,
+                    title: "大家知道什麼是生物膜嗎？",
+                    snippet: "上禮拜跟同學一起去宜蘭包棟過夜，才發現居然有人不知道生物膜是什麼😳，我以為這是生活常識耶！！，簡單講生物膜就是細菌聚集後形成的一層黏黏滑滑的膜，超常出現在水槽排水口、浴室磁磚縫...",
+                    link: "https://www.dcard.tw/f/talk/p/261522379",
+                    likes: 46,
+                    comments: 22,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 16,
+                    title: "大家最近也開始感受到畢業即失業了嗎…",
+                    snippet: "今年應屆畢業的大家都開始找工作了嗎？這陣子投了好多家職缺，每一次按出送出履歷，心裡都抱著一絲期待，結果換來的只有無止境的已讀不回。 看著那些投遞狀態從未讀變成已讀，然後就再也沒有然後了...",
+                    link: "https://www.dcard.tw/f/talk/p/261524084",
+                    likes: 22,
+                    comments: 24,
+                    sentiment: "Negative",
+                    sentiment_score: 0.3
+                },
+                {
+                    id: 17,
+                    title: "台男：醫學系的課是我聽到最多歧視性別跟種族的地方",
+                    snippet: "台男認證的醫學系台男最愛歧視性別跟種族，文章發出後引發醫學生與其他卡友之間的熱烈論戰...",
+                    link: "https://www.dcard.tw/f/talk/p/261525964",
+                    likes: 20,
+                    comments: 33,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 18,
+                    title: "家人過世請益",
+                    snippet: "我的父親在前幾天過世了，名下有許多東西（車子、機車、房子、財產）等等。目前尚未辦除戶，財產為母親與我平分繼承，請問除戶之前可以將郵局及銀行的錢領出嗎？目前汽機車過戶要怎麼辦理？",
+                    link: "https://www.dcard.tw/f/talk/p/261524950",
+                    likes: 9,
+                    comments: 13,
+                    sentiment: "Negative",
+                    sentiment_score: 0.4
+                },
+                {
+                    id: 19,
+                    title: "不主動、不拒絕、不負責",
+                    snippet: "女人真的別以為，男人對妳有點主動、有點曖昧，妳就能拿捏 his心態。很多時候，妳以為自己在拉扯他，其實人家心裡根本超清楚。他知道妳在釋放好感，但又故意不讓他真的得到，不就是想看他會不會先付出...",
+                    link: "https://www.dcard.tw/f/talk/p/261521331",
+                    likes: 20,
+                    comments: 11,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 20,
+                    title: "外國人：感受到台灣人心險惡，但我能忍受",
+                    snippet: "台灣人現在對外國人愈來愈不友善了，來台長住的外籍網友發文抒發對台灣日常生活與職場文化中人情冷暖的深刻感受...",
+                    link: "https://www.dcard.tw/f/talk/p/261519312",
+                    likes: 12,
+                    comments: 3,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 21,
+                    title: "外國人：台鐵應該設立茹素專用車廂",
+                    snippet: "台灣實在太落後了，除了女性專屬車廂，應該還要有茹素專屬車廂，台灣不加緊腳步跟上國際，難怪國旅發展失敗，連外國人都看不下去，此言一出引發吃素與吃肉卡友論戰...",
+                    link: "https://www.dcard.tw/f/talk/p/261516000",
+                    likes: 15,
+                    comments: 40,
+                    sentiment: "Negative",
+                    sentiment_score: 0.3
+                },
+                {
+                    id: 22,
+                    title: "現在超商整齊標準都要這麼高嗎",
+                    snippet: "如題，看到threads上有人發了這個，我嘖嘖稱奇，確實看起來很賞心悅目沒錯，但我真的是很好奇店員要排成這樣要花多少時間啊，要不就是他有強迫症或是完美主義心態，要不就是生意不好所以他有大把時間...",
+                    link: "https://www.dcard.tw/f/talk/p/261519525",
+                    likes: 25,
+                    comments: 4,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 23,
+                    title: "iwin的兒童及少年福利與權益保障法修正草案看起來超級危險",
+                    snippet: "連結內是前版上的討論，大致整理了修改後的問題：一、 擴大權能夠硬性封網，相較於原本沒有的定義，修法後幾乎將整個台灣的網路生態全面納入管轄...",
+                    link: "https://www.dcard.tw/f/talk/p/261522470",
+                    likes: 18,
+                    comments: 6,
+                    sentiment: "Negative",
+                    sentiment_score: 0.4
+                },
+                {
+                    id: 24,
+                    title: "衛福部又想搞鬼了",
+                    snippet: "他們弄了一個這個，其中 第59條寫了，說人話 他可以不跑任何流程直接封網，然後最嚴重的，是年齡識別標準的制定與技術要求，恐侵害網路言論自由與隱私權...",
+                    link: "https://www.dcard.tw/f/talk/p/261347486",
+                    likes: 16,
+                    comments: 9,
+                    sentiment: "Neutral",
+                    sentiment_score: 0.5
+                },
+                {
+                    id: 25,
+                    title: "油煙機換新求建議！",
+                    snippet: "舊的抽油煙機因為卡油刷不掉，感覺吸力變得很無感，想換進風口離鍋子近的款式，目前在看櫻花的DR7397，不知道這種近吸式攔截油煙的效果好嗎？另外想問它的靜音除味功能，運轉聲音會不會很大？",
+                    link: "https://www.dcard.tw/f/talk/p/261522282",
+                    likes: 15,
+                    comments: 6,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 26,
+                    title: "簡直跟猴子一樣",
+                    snippet: "在蔦屋書店跟星巴克附設的座位吃 「韭菜」煎包， 還有看手機音量開大聲， 真的是跟猴子一樣，有夠扯，猩球崛起裡的都比這隻有文化...",
+                    link: "https://www.dcard.tw/f/talk/p/261522712",
+                    likes: 9,
+                    comments: 7,
+                    sentiment: "Negative",
+                    sentiment_score: 0.4
+                },
+                {
+                    id: 27,
+                    title: "有人會把打手槍後的衛生紙暫時放在電腦機殼嗎",
+                    snippet: "剛打完手槍的衛生紙都會有很明顯的味道，如果馬上丟垃圾桶其他人打開一下很快就聞到了，放在在房間也有味道，後來發現可以放電腦機殼裡而且很通風不會有異味，隔天拿出來就乾了很方便...",
+                    link: "https://www.dcard.tw/f/talk/p/261525575",
+                    likes: 11,
+                    comments: 17,
+                    sentiment: "Negative",
+                    sentiment_score: 0.4
+                },
+                {
+                    id: 28,
+                    title: "啊勞越來越多",
+                    snippet: "今天在自習室遇到啊勞 香水味整間都是就算了 手機不關靜音通知狂跳 脫拖鞋盤腿坐 在看他了繼續大聊特聊 好奇在他們國家在圖書館這樣很正常嗎？如果遇到這種又語言不通要怎麼處理？除了抓去當工人...",
+                    link: "https://www.dcard.tw/f/talk/p/261525492",
+                    likes: 6,
+                    comments: 2,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 29,
+                    title: "如果你的命必須殺人續命你會去做嗎？",
+                    snippet: "看完〈國有器官〉 我跟男友大吵一架…… 我一直以為大部分人都跟我一樣，即使到了窮途末路的時候，也絕對不會為了自己活命而害人，畢氣從小到大都被教要當個好人，但男友卻說，如果為了親人活命他一定會...",
+                    link: "https://www.dcard.tw/f/talk/p/261526170",
+                    likes: 7,
+                    comments: 15,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                },
+                {
+                    id: 30,
+                    title: "[閒聊] 被寶雅店員朋友推坑的瞬暢果凍，認真有效💩",
+                    snippet: "上次跟一個在寶雅上班的朋友吃飯，聊到我最近因為壓力大，肚子脹到快炸開，每次去廁所都會蹲到腳麻，本來真的打算去藥局買那種強效便秘藥了，結果我朋友叫我冷靜，說那種藥不能亂吃，吃久了腸胃會變得很懶惰...",
+                    link: "https://www.dcard.tw/f/talk/p/261522237",
+                    likes: 8,
+                    comments: 5,
+                    sentiment: "Positive",
+                    sentiment_score: 0.6
+                }
+            ]
+        };
+
+        // --- Interactive Filter Logic for Dcard ---
+        let dcardFilterSentiment = "All";
+        let dcardSearchQuery = "";
+
+        function filterDcardPosts() {
+            const searchVal = document.getElementById("dcard-search").value.toLowerCase();
+            dcardSearchQuery = searchVal;
+            renderDcardPostsGrid();
+        }
+
+        function filterDcardTab(sentiment) {
+            dcardFilterSentiment = sentiment;
+            
+            // Toggle active classes on buttons
+            document.querySelectorAll(".dcard-filter-btn").forEach(btn => {
+                btn.className = "dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-slate-100 text-slate-500 hover:bg-slate-200";
+            });
+            
+            const activeBtn = document.getElementById(`dcard-btn-${sentiment}`);
+            if (activeBtn) {
+                activeBtn.className = "dcard-filter-btn px-5 py-2 rounded-xl font-bold text-xs bg-purple-600 text-white shadow";
+            }
+            
+            renderDcardPostsGrid();
+        }
+
+        function renderDcardPostsGrid() {
+            const container = document.getElementById("dcard-posts-list");
+            if (!container) return;
+
+            let filtered = dcardAnalysisData.posts;
+
+            // Apply Sentiment Filter
+            if (dcardFilterSentiment !== "All") {
+                filtered = filtered.filter(p => p.sentiment === dcardFilterSentiment);
+            }
+
+            // Apply Search Query Filter
+            if (dcardSearchQuery.trim() !== "") {
+                filtered = filtered.filter(p => 
+                    p.title.toLowerCase().includes(dcardSearchQuery) || 
+                    p.snippet.toLowerCase().includes(dcardSearchQuery)
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-2 text-center py-12 text-slate-400">
+                        <p class="text-sm">無符合搜尋或情緒條件的貼文</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(p => {
+                let badgeClass = "bg-slate-100 text-slate-600";
+                let badgeText = "中立";
+                if (p.sentiment === "Positive") { badgeClass = "bg-emerald-100 text-emerald-700"; badgeText = "正向"; }
+                if (p.sentiment === "Negative") { badgeClass = "bg-rose-100 text-rose-700"; badgeText = "負向"; }
+
+                return `
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between h-full hover:border-purple-300 transition-all duration-300">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="px-3 py-1 rounded-lg text-xs font-bold ${badgeClass}">${badgeText} (${p.sentiment_score})</span>
+                                <span class="text-xs text-slate-400">ID: #${p.id}</span>
+                            </div>
+                            <h4 class="font-bold text-slate-800 mb-2 leading-relaxed hover:text-purple-600 transition">
+                                <a href="${p.link}" target="_blank">${p.title}</a>
+                            </h4>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">${p.snippet}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-auto border-t border-slate-200/60 pt-4">
+                            <div class="flex gap-4 text-xs text-slate-400 font-bold">
+                                <span>👍 ${p.likes} 反應</span>
+                                <span>💬 ${p.comments} 留言</span>
+                            </div>
+                            <a href="${p.link}" target="_blank" class="text-purple-600 font-bold text-xs hover:text-purple-700">閱讀原文 &rarr;</a>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        // --- Initialize Dcard Dashboard Elements ---
+        function initDcardDataView() {
+            // Render Keyword Badges TOP 30
+            const cloud = document.getElementById("dcardKeywordCloud");
+            if (cloud) {
+                cloud.innerHTML = dcardAnalysisData.top_keywords.map((k, i) => {
+                    let heatClass = "bg-white/10 text-slate-300";
+                    if (i < 5) heatClass = "bg-emerald-600/20 text-emerald-300 border border-emerald-500/20";
+                    else if (i < 15) heatClass = "bg-purple-600/20 text-purple-300 border border-purple-500/20";
+                    
+                    return `
+                        <span class="text-sm font-bold px-3.5 py-1.5 rounded-xl ${heatClass} transition-all cursor-default shadow-sm hover:scale-105" title="提及頻次: ${k.value}">
+                            ${k.text} <small class="opacity-60 ml-1">(${k.value})</small>
+                        </span>
+                    `;
+                }).join("");
+            }
+
+            // Render Posts List Grid
+            renderDcardPostsGrid();
+
+            // Render Donut Chart
+            try {
+                const dcardCtx = document.getElementById('dcardSentimentChart');
+                if (dcardCtx) {
+                    if (analysisCharts.dcard) analysisCharts.dcard.destroy();
+
+                    analysisCharts.dcard = new Chart(dcardCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['正向情緒', '中立情緒', '負向情緒'],
+                            datasets: [{
+                                data: [
+                                    dcardAnalysisData.overall.sentiment_distribution.Positive,
+                                    dcardAnalysisData.overall.sentiment_distribution.Neutral,
+                                    dcardAnalysisData.overall.sentiment_distribution.Negative
+                                ],
+                                backgroundColor: ['#10b981', '#3b82f6', '#ef4444'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                    labels: {
+                                        font: {
+                                            weight: 'bold',
+                                            family: 'Noto Sans TC'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch(e) {
+                console.error("Dcard 圖表初始化失敗:", e);
+            }
+        }
+
+        function renderList(category) {
+            const container = document.getElementById('list-container');
+            const title = document.getElementById('list-title');
+            const items = data[category];
+
+            if (category === 'hiking') title.innerText = '運動步道';
+            else if (category === 'attractions') title.innerText = '私房景點';
+            else if (category === 'food') title.innerText = '在地美食';
+
+            container.innerHTML = items.map(item => `
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 flex flex-col h-full card-hover cursor-pointer group" onclick="showDetail('${category}', '${item.id}')">
+                    <div class="relative h-60 overflow-hidden">
+                        <div class="absolute inset-0 img-placeholder"><i class="fas fa-image text-3xl"></i></div>
+                        <img src="${item.img}" class="relative z-10 w-full h-full object-cover transition-transform group-hover:scale-110" 
+                             onload="this.style.opacity=1" style="opacity:0">
+                        <div class="absolute top-5 left-5 z-20 bg-emerald-600 text-white px-3 py-1 rounded-lg text-xs font-bold shadow-md">
+                            ${category === 'hiking' ? '難度：' + (item.difficulty || '★☆☆☆☆') : item.category}
+                        </div>
+                        ${item.membersOnly ? '<div class="absolute top-5 right-5 z-20 bg-amber-500 text-white px-3 py-1 rounded-lg text-xs font-bold shadow-md flex items-center"><i class="fas fa-lock mr-1"></i>會員專屬</div>' : ''}
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 text-slate-800">${item.title}</h3>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-2">${item.short}</p>
+                        <div class="mt-auto text-emerald-600 font-bold text-sm">閱讀完整攻略 →</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showDetail(category, id) {
+            const item = data[category].find(x => x.id === id);
+            if (!item) return;
+
+            const content = document.getElementById('detail-content');
+
+            content.innerHTML = `
+                <div class="relative h-64 md:h-[450px]">
+                    <img src="${item.img}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent flex items-end p-8 md:p-16">
+                        <div>
+                            <h2 class="text-4xl md:text-5xl font-black text-white mb-2">${item.title}</h2>
+                            <p class="text-emerald-300 font-medium">${item.short}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-16">
+                    <div class="flex flex-col lg:flex-row gap-16">
+                        <div class="lg:w-2/3">${item.content}</div>
+                        <div class="lg:w-1/3 space-y-8">
+                            <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                <h4 class="font-bold text-xl mb-4 text-emerald-800">實用資訊</h4>
+                                <div class="space-y-4 text-sm">
+                                    <div><p class="text-slate-400">交通：</p><p class="text-slate-700">${item.transport}</p></div>
+                                    <div><p class="text-slate-400">耗時：</p><p class="text-slate-700">${item.time || 'N/A'}</p></div>
+                                    <div><p class="text-slate-400">難度：</p><p class="text-slate-700">${item.difficulty || 'N/A'}</p></div>
+                                </div>
+                            </div>
+                            <div class="bg-emerald-900 text-white p-8 rounded-3xl">
+                                <h4 class="font-bold text-xl mb-4 text-emerald-300">專家 Tips</h4>
+                                <p class="text-sm opacity-90">${item.recommend}</p>
+                                ${item.points ? `<ul class="mt-4 space-y-2 text-sm">${item.points.map(p => `<li><i class="fas fa-check mr-2"></i>${p}</li>`).join('')}</ul>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('page-list-view').classList.add('hidden-page');
+            document.getElementById('page-detail').classList.remove('hidden-page');
+            document.getElementById('page-detail').classList.add('visible-page');
+            window.scrollTo(0, 0);
+        }
+
+        function goBackToList() {
+            document.getElementById('page-detail').classList.add('hidden-page');
+            document.getElementById('page-list-view').classList.remove('hidden-page');
+            document.getElementById('page-list-view').classList.add('visible-page');
+        }
+
+
+        // ================= PTT 分析圖表初始化 =================
+        let analysisCharts = {};
+        function initAnalysisCharts() {
+            try {
+                if (typeof Chart === 'undefined') {
+                    console.warn('Chart.js 尚未載入');
+                    return;
+                }
+                const analysisData = {
+                    categories: {"食記": 33, "公告": 4, "轉讓": 4, "廣宣": 2, "請益": 2},
+                    regions: {"台北": 5, "台南": 3, "台中": 2, "苗栗": 1, "岡山": 1},
+                    keywords: [
+                        {text: "曉迪筒仔米糕", size: "text-2xl"}, {text: "這一小鍋", size: "text-3xl"},
+                        {text: "太豐御炒", size: "text-2xl"}, {text: "蔬食餐酒館", size: "text-xl"},
+                        {text: "乳酪果子", size: "text-lg"}, {text: "免費紅茶", size: "text-xl"},
+                        {text: "外帶優惠", size: "text-lg"}, {text: "台北中正", size: "text-2xl"},
+                        {text: "台南永康", size: "text-xl"}, {text: "田新牛家莊", size: "text-lg"},
+                        {text: "超讚", size: "text-3xl"}, {text: "內用", size: "text-sm"}
+                    ],
+                    summaries: {
+                        "曉迪筒仔米糕": "南機場夜市名店，以入味的米糕與平實價格著稱，是 PTT Food 版上討論度極高的台北夜市小吃。網友特別推薦其排骨酥湯與滷肉飯。",
+                        "這一小鍋": "連鎖火鍋品牌，主打復古裝潢與高 CP 值。板友討論焦點在於其自助吧的多樣性，以及其獨特的石頭火鍋湯底香氣。",
+                        "太豐御炒": "位於台北中正區的創意炒飯/熱炒店，因其獨特的調味與驚人的份量在板上獲得不少好評，被視為地區性的隱藏美食。",
+                        "蔬食餐酒館": "近期討論趨勢顯示蔬食風潮興起，網友對於結合餐酒館氛圍的蔬食料理接受度日益增高，顯示素食者與葷食者共餐的需求增加。",
+                        "乳酪果子": "這類關鍵字通常出現在甜點推薦文章中。討論集中在乳酪與水果結合的層次感，以及多位部落客分享的宅配美食清單中。",
+                        "免費紅茶": "高 CP 值美食的重要指標。網友在評論平價排餐、便當或快炒店時，常將『紅茶好喝且免費供應』作為加分項目。",
+                        "外帶優惠": "受後疫情時代影響，外帶折扣仍是板友關注焦點。特別是百貨品牌或連鎖體系推出的外帶限定套餐，常引發熱烈轉載。",
+                        "台北中正": "該地區近期因多間老店轉型與新興文青店進駐，討論熱度居高不下，是台北美食討論的核心區域之一。",
+                        "台南永康": "南部地區討論亮點。永康區近期因多間深夜食堂與牛肉湯店家的口碑傳播，成為南台灣板友食記分享的熱點。",
+                        "田新牛家莊": "苗栗頭份的名店，主打全牛料理。網友對其牛肉片、牛雜湯的鮮甜度評價極高，是不少出遊經過苗栗的必訪建議。",
+                        "超讚": "版上最直觀的情緒形容詞。通常出現在『必吃』、『回訪多次』的文章標題中，是高效篩選美食的重要信號。",
+                        "內用": "隨著服務流程優化，網友對內用環境（如冷氣、清潔度、座位間距）的描述增加，不再僅僅關注食物本身。"
+                    }
+                };
+
+                // 關鍵字雲生成
+                const cloud = document.getElementById('keywordCloud');
+                if (cloud) {
+                    cloud.innerHTML = analysisData.keywords.map(k => `
+                        <span onclick="showKeywordSummary('${k.text}')" class="${k.size} font-bold px-4 py-2 rounded-2xl bg-white/10 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer border border-white/5 shadow-sm active:scale-90">
+                            ${k.text}
+                        </span>
+                    `).join('');
+                }
+
+                // 註冊摘要 Modal 函數
+                window.showKeywordSummary = function(keyword) {
+                    const modal = document.getElementById('keyword-modal');
+                    const content = document.getElementById('keyword-modal-content');
+                    const title = document.getElementById('kw-title');
+                    const summary = document.getElementById('kw-summary');
+                    const tag = document.getElementById('kw-tag');
+
+                    if (analysisData.summaries[keyword]) {
+                        title.innerText = keyword;
+                        summary.innerText = analysisData.summaries[keyword];
+                        tag.innerText = "PTT 討論摘要";
+                        
+                        modal.classList.remove('opacity-0', 'pointer-events-none');
+                        content.classList.remove('scale-95');
+                        content.classList.add('scale-100');
+                    }
+                };
+
+                window.closeKeywordSummary = function() {
+                    const modal = document.getElementById('keyword-modal');
+                    const content = document.getElementById('keyword-modal-content');
+                    
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                    content.classList.add('scale-95');
+                    content.classList.remove('scale-100');
+                };
+
+                // 清除並重繪圖表
+                if (analysisCharts.cat) analysisCharts.cat.destroy();
+                if (analysisCharts.reg) analysisCharts.reg.destroy();
+
+                const catCtx = document.getElementById('categoryChart');
+                if (catCtx) {
+                    analysisCharts.cat = new Chart(catCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: Object.keys(analysisData.categories),
+                            datasets: [{
+                                data: Object.values(analysisData.categories),
+                                backgroundColor: ['#059669', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+                    });
+                }
+
+                const regCtx = document.getElementById('regionChart');
+                if (regCtx) {
+                    analysisCharts.reg = new Chart(regCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: Object.keys(analysisData.regions),
+                            datasets: [{
+                                label: '討論篇數',
+                                data: Object.values(analysisData.regions),
+                                backgroundColor: '#10b981',
+                                borderRadius: 12
+                            }]
+                        },
+                        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { display: false }, y: { grid: { display: false } } } }
+                    });
+                }
+            } catch (e) {
+                console.error("圖表初始化失敗:", e);
+            }
+        }
+
+        // 移除舊的覆寫邏輯，因為已經整合進新的 showPage 中
+
+        window.onload = () => {
+            showPage('home');
+        };
+    </script>
+
+    <!-- YouTube IFrame API for GA4 Event Tracking -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        var videoPlayed = false;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-video', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        function onPlayerStateChange(event) {
+            // Trigger custom GA4 event when the video is played for the first time
+            if (event.data == YT.PlayerState.PLAYING && !videoPlayed) {
+                videoPlayed = true;
+                if (typeof gtag === 'function') {
+                    gtag('event', '感興趣的使用者', {
+                        'event_category': 'Video Interaction',
+                        'video_title': '文山之美',
+                        'action': 'play'
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
